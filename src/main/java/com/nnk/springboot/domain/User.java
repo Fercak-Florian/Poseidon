@@ -1,7 +1,7 @@
 package com.nnk.springboot.domain;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+/*import javax.validation.constraints.NotBlank;*/
 
 import lombok.Data;
 
@@ -14,16 +14,16 @@ public class User {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
     
-    @NotBlank(message = "Username is mandatory")
+   /* @NotBlank(message = "Username is mandatory")*/
     private String username;
     
-    @NotBlank(message = "Password is mandatory")
+    /*@NotBlank(message = "Password is mandatory")*/
     private String password;
     
-    @NotBlank(message = "FullName is mandatory")
+    /*@NotBlank(message = "FullName is mandatory")*/
     private String fullname;
     
-    @NotBlank(message = "Role is mandatory")
+    /*@NotBlank(message = "Role is mandatory")*/
     private String role;
 
    /* public Integer getId() {

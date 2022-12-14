@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Required;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
+/*import javax.validation.constraints.Digits;*/
+/*import javax.validation.constraints.NotBlank;*/
 import java.sql.Date;
 import java.sql.Timestamp;
 

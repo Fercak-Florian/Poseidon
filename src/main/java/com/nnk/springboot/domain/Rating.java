@@ -26,15 +26,15 @@ public class Rating {
 	@Column(name = "id")
 	private int id;
 	
-	@Column(name = "moodysRating")
+	@Column(name = "moodys_rating")
 	private String moodysRating;
 	
-	@Column(name = "sandRating")
+	@Column(name = "sand_rating")
 	private String sandRating;
 	
-	@Column(name = "fitchRating")
+	@Column(name = "fitch_rating")
 	private String fitchRating;
 	
-	@Column(name = "orderNumber")
+	@Column(name = "order_number")
 	private int orderNumber;
 }

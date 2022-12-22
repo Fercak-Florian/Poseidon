@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 
 @Data
 @Entity
-@Table(name = "curvepoint")
+@Table(name = "curve_point")
 public class CurvePoint {
 	
     // TODO: Map columns in data table CURVEPOINT with corresponding java fields
@@ -26,10 +26,10 @@ public class CurvePoint {
 	@Column(name = "id")
 	private int id;
 	
-	@Column(name = "curveId")
+	@Column(name = "curve_id")
 	private int curveId;
 	
-	@Column(name = "asOfDate")
+	@Column(name = "as_of_date")
 	private Timestamp asOfDate;
 	
 	@Column(name = "term")
@@ -38,6 +38,6 @@ public class CurvePoint {
 	@Column(name = "value")
 	private double value;
 	
-	@Column(name = "creationDate")
+	@Column(name = "creation_date")
 	private Timestamp creationDate;
 }

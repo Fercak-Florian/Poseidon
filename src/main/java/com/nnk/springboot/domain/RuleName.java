@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 
 @Data
 @Entity
-@Table(name = "rulename")
+@Table(name = "rule_name")
 public class RuleName {
 	
     // TODO: Map columns in data table RULENAME with corresponding java fields
@@ -39,9 +39,9 @@ public class RuleName {
 	@Column(name = "template")
 	private String template;
 	
-	@Column(name = "sqlStr")
+	@Column(name = "sql_str")
 	private String sqlStr;
 	
-	@Column(name = "sqlPart")
+	@Column(name = "sql_part")
 	private String sqlPart;
 }

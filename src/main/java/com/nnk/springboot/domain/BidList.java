@@ -6,7 +6,9 @@ import lombok.Data;
 
 import javax.persistence.*;
 /*import javax.validation.constraints.Digits;*/
-/*import javax.validation.constraints.NotBlank;*/
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
+
 import java.sql.Date;
 import java.sql.Timestamp;
 
@@ -16,6 +18,10 @@ import java.sql.Timestamp;
 public class BidList {
 	
     // TODO: Map columns in data table BIDLIST with corresponding java fields
+	
+	public BidList() {
+	}
+	
 	public BidList(String account, String type, double bidQuantity) {
 		this.account = account;
 		this.type = type;
@@ -27,12 +33,15 @@ public class BidList {
 	@Column(name = "id")
 	private int id;
 	
+	@NotBlank(message = "Name is mandatory")
 	@Column(name = "account")
 	private String account;
 	
+	@NotBlank(message = "Type is mandatory")
 	@Column(name = "type")
 	private String type;
 	
+	@Positive
 	@Column(name = "bid_quantity")
 	private double bidQuantity;
 	

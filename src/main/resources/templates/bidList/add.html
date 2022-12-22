@@ -15,25 +15,39 @@
 		</div>
 
 		<div class="row">
-			<form action="#" th:action="@{/bidList/validate}" th:object="${bid}" method="post"
-				class="form-horizontal" style="width: 100%">
+			<form action="#" th:action="@{/bidList/validate}" th:object="${bid}" method="post" class="form-horizontal"
+				style="width: 100%">
 				<!--
 			TODO: Create a form to input the values of Bid, there are 2 buttons: Save data and Cancel to the list Bid
 			 -->
-				<label for="account">Account:</label>
-				<input type="text" id="account" name="account" th:field="*{account}"><br><br>
-				
-				<label for="type">Type:</label>
-				<input type="text" id="type" name="type" th:field="*{type}"><br><br>
-				
-				<label for="bidquantity">Bid Quantity:</label>
-				<input type="number" id="bidquantity" name="bidquantity" th:field="*{bidQuantity}"><br><br>
-				
-				<button type="submit" value="Save">
-				<button type="submit" value="Cancel">
+				<div class="form-group">
+					<label for="account" class="col-sm-2 control-label">Account:</label>
+					<div class="col-sm-10">
+						<input type="text" id="account" name="account">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="type" class="col-sm-2 control-label">Type:</label>
+					<div class="col-sm-10">
+						<input type="text" id="type" name="type">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="bidquantity" class="col-sm-2 control-label">Bid Quantity:</label>
+					<div class="col-sm-10">
+						<input type="number" id="bidquantity" name="bidQuantity">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-12">
+						<button type="submit" class="btn btn-success btn-sm" formmethod="post"
+							formaction="/bidList/validate">Save</button>
+						<button type="submit" class="btn btn-danger btn-sm" formmethod="get"
+							formaction="/bidList/list">Cancel</button>
+					</div>
+				</div>
 			</form>
 		</div>
-
 	</div>
 </body>
 

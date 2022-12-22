@@ -15,6 +15,10 @@ import java.sql.Timestamp;
 public class CurvePoint {
 	
     // TODO: Map columns in data table CURVEPOINT with corresponding java fields
+	
+	public CurvePoint() {
+	}
+	
 	public CurvePoint(int curveId, double term,  double value) {
 		this.curveId = curveId;
 		this.term = term;

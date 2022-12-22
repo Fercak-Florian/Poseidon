@@ -14,6 +14,10 @@ import java.sql.Timestamp;
 public class Rating {
 	
     // TODO: Map columns in data table RATING with corresponding java fields
+	
+	public Rating() {
+	}
+	
 	public Rating(String moodysRating, String sandRating, String fitchRating, int orderNumber) {
 		this.moodysRating = moodysRating;
 		this.sandRating = sandRating;

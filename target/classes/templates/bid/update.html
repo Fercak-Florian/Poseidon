@@ -13,34 +13,34 @@
 	</div>
 
 	<div class="row">
-		<form action="#" th:action="@{/bidList/update/{id}(id=${bidList.id})}" th:object="${bidList}" method="post" class="form-horizontal" style="width: 100%">
+		<form action="#" th:action="@{/bid/update/{id}(id=${bid.id})}" th:object="${bid}" method="post" class="form-horizontal" style="width: 100%">
 			<!--
 			TODO: Create a form to edit the values of Bid, there are 2 buttons: Update data and Cancel to the list Bid
 			 -->
 			 <div class="form-group">
 					<label for="account" class="col-sm-2 control-label">Account:</label>
 					<div class="col-sm-10">
-						<input type="text" id="account" name="account" th:value="${bidList.account}">
+						<input type="text" id="account" name="account" th:value="${bid.account}">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="type" class="col-sm-2 control-label">Type:</label>
 					<div class="col-sm-10">
-						<input type="text" id="type" name="type" th:value="${bidList.type}">
+						<input type="text" id="type" name="type" th:value="${bid.type}">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="bidquantity" class="col-sm-2 control-label">Bid Quantity:</label>
 					<div class="col-sm-10">
-						<input type="number" id="bidquantity" name="bidQuantity" th:value="${bidList.bidQuantity}">
+						<input type="number" id="bidquantity" name="bidQuantity" th:value="${bid.bidQuantity}">
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-12">
 						<button type="submit" class="btn btn-success btn-sm" formmethod="post"
-							th:formaction="@{/bidList/update/{id}(id=${bidList.id})}">Update</button>
+							th:formaction="@{/bid/update/{id}(id=${bid.id})}">Update</button>
 						<button type="submit" class="btn btn-danger btn-sm" formmethod="get"
-							formaction="/bidList/list">Cancel</button>
+							formaction="/bid/list">Cancel</button>
 					</div>
 				</div>
 		</form>

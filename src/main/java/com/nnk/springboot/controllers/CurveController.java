@@ -41,7 +41,7 @@ public class CurveController {
     }
 
     @PostMapping("/curvePoint/validate")
-    public String validate(@ModelAttribute @Validated CurvePoint curvePoint, BindingResult result, Model model) {
+    public String validate(@Validated CurvePoint curvePoint, BindingResult result, Model model) {
         // TODO: check data valid and save to db, after saving return Curve list
     	curvePointService.saveCurvePoint(curvePoint);
         return "curvePoint/add";
@@ -56,7 +56,7 @@ public class CurveController {
     }
 
     @PostMapping("/curvePoint/update/{id}")
-    public String updateBid(@PathVariable("id") Integer id, @ModelAttribute @Validated CurvePoint curvePoint,
+    public String updateBid(@PathVariable("id") Integer id, @Validated CurvePoint curvePoint,
                              BindingResult result, Model model) {
         // TODO: check required fields, if valid call service to update Curve and return Curve list
     	curvePointService.updateCurvePoint(id, curvePoint);

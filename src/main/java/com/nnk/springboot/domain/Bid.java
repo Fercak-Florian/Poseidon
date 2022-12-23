@@ -14,15 +14,15 @@ import java.sql.Timestamp;
 
 @Data
 @Entity
-@Table(name = "bid_list")
-public class BidList {
+@Table(name = "bid")
+public class Bid {
 	
     // TODO: Map columns in data table BIDLIST with corresponding java fields
 	
-	public BidList() {
+	public Bid() {
 	}
 	
-	public BidList(String account, String type, double bidQuantity) {
+	public Bid(String account, String type, double bidQuantity) {
 		this.account = account;
 		this.type = type;
 		this.bidQuantity = bidQuantity;

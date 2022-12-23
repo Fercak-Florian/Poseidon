@@ -4,7 +4,7 @@ DROP DATABASE demo;
 CREATE DATABASE demo;
 USE demo;
 
-CREATE TABLE bid_list (
+CREATE TABLE bid (
   id tinyint(4) NOT NULL AUTO_INCREMENT,
   account VARCHAR(30) NOT NULL,
   type VARCHAR(30) NOT NULL,

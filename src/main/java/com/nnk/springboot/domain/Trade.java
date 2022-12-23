@@ -13,6 +13,10 @@ import java.sql.Timestamp;
 public class Trade {
 	
     // TODO: Map columns in data table TRADE with corresponding java fields
+	
+	public Trade() {
+	}
+	
 	public Trade(String account, String type) {
 		this.account = account;
 		this.type = type;
@@ -21,7 +25,7 @@ public class Trade {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int tradeId;
+	private int id;
 	
 	@Column(name = "account")
 	private String account;

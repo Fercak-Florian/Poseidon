@@ -3,6 +3,8 @@ package com.nnk.springboot.controllers;
 import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.services.TradeService;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /*import javax.validation.Valid;*/
 
+@Slf4j
 @Controller
 public class TradeController {
     // TODO: Inject Trade service
@@ -32,12 +35,14 @@ public class TradeController {
     {
         // TODO: find all Trade, add to model
     	List<Trade> trades = tradeService.getTrades();
-    	model.addAttribute("trades", trades);	
+    	model.addAttribute("trades", trades);
+    	log.info("display trade list");
         return "trade/list";
     }
 
     @GetMapping("/trade/add")
     public String addUser(/*Trade bid*/) {
+    	log.info("display form to add trade");
         return "trade/add";
     }
 
@@ -45,6 +50,7 @@ public class TradeController {
     public String validate(@Validated Trade trade, BindingResult result, Model model) {
         // TODO: check data valid and save to db, after saving return Trade list
     	tradeService.saveTrade(trade);
+    	log.info("successful trade adding");
         return "trade/add";
     }
 
@@ -53,6 +59,7 @@ public class TradeController {
         // TODO: get Trade by Id and to model then show to the form
     	Trade trade = tradeService.getTradeById(id).get();
     	model.addAttribute("trade", trade);
+    	log.info("display form to update trade");
         return "trade/update";
     }
 
@@ -61,6 +68,7 @@ public class TradeController {
                              BindingResult result, Model model) {
         // TODO: check required fields, if valid call service to update Trade and return Trade list
     	tradeService.updateTrade(id, trade);
+    	log.info("successful trade updating");
     	return "redirect:/trade/list";
     }
 
@@ -68,6 +76,7 @@ public class TradeController {
     public String deleteTrade(@PathVariable("id") Integer id, Model model) {
         // TODO: Find Trade by Id and delete the Trade, return to Trade list
     	tradeService.deleteTrade(id);
+    	log.info("successful trade deleting");
         return "redirect:/trade/list";
     }
 }

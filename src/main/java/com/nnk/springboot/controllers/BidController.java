@@ -3,6 +3,8 @@ package com.nnk.springboot.controllers;
 import com.nnk.springboot.domain.Bid;
 import com.nnk.springboot.services.BidService;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /*import javax.validation.Valid;*/
 
+@Slf4j
 @Controller
 public class BidController {
 	// TODO: Inject Bid service
@@ -33,11 +36,13 @@ public class BidController {
 		// TODO: call service find all bids to show to the view
 		List<Bid> bids = bidService.getBids();
 		model.addAttribute("bids", bids);
+		log.info("display bid list");
 		return "bid/list";
 	}
 
 	@GetMapping("/bid/add")
 	public String addBidForm(/*BidList bid*/) {
+		log.info("display form to add bid");
 		return "bid/add";
 	}
 
@@ -45,6 +50,7 @@ public class BidController {
 	public String validate(@Validated Bid bid, BindingResult result, Model model) {
 		// TODO: check data valid and save to db, after saving return bid list
 		bidService.saveBid(bid);
+		log.info("successful bid adding");
 		return "bid/add";
 	}
 
@@ -55,6 +61,7 @@ public class BidController {
 		Optional<Bid> optBid = bidService.getBidById(id);
 		Bid bid = optBid.get();
 		model.addAttribute("bid", bid);
+		log.info("display form to update bid");
 		return "bid/update";
 	}
 
@@ -64,6 +71,7 @@ public class BidController {
 		// TODO: check required fields, if valid call service to update Bid and return
 		// list Bid
 		bidService.updateBid(id, bid);
+		log.info("successful bid updating");
 		return "redirect:/bid/list";
 	}
 
@@ -71,6 +79,7 @@ public class BidController {
 	public String deleteBid(@PathVariable("id") Integer id, Model model) {
 		// TODO: Find Bid by Id and delete the bid, return to Bid list
 		bidService.deleteBid(id);
+		log.info("successful bid deleting");
 		return "redirect:/bid/list";
 	}
 }

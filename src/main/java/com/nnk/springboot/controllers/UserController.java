@@ -3,6 +3,8 @@ package com.nnk.springboot.controllers;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.services.UserService;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.List;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /*import javax.validation.Valid;*/
 
+@Slf4j
 @Controller
 public class UserController {
    
@@ -31,11 +34,13 @@ public class UserController {
     {
     	List<User> users = userService.getUsers();
         model.addAttribute("users", users);
+        log.info("display user list");
         return "user/list";
     }
 
     @GetMapping("/user/add")
     public String addUser(User bid) {
+    	log.info("display form to add user");
         return "user/add";
     }
 
@@ -47,6 +52,7 @@ public class UserController {
             userService.saveUser(user);
             List<User> users = userService.getUsers();
             model.addAttribute("users", users);
+            log.info("successful user adding");
             return "redirect:/user/list";
         }
         return "user/add";
@@ -57,6 +63,7 @@ public class UserController {
         User user = userService.getUserById(id);
         user.setPassword("");
         model.addAttribute("user", user);
+        log.info("display form to update user");
         return "user/update";
     }
 
@@ -64,6 +71,7 @@ public class UserController {
     public String updateUser(@PathVariable("id") Integer id, @Validated User user,
                              BindingResult result, Model model) {
         if (result.hasErrors()) {
+        	log.info("failed to add user");
             return "user/update";
         }
 
@@ -73,6 +81,7 @@ public class UserController {
         userService.saveUser(user);
         List<User> users = userService.getUsers();
         model.addAttribute("users", users);
+        log.info("successful user updating");
         return "redirect:/user/list";
     }
 
@@ -81,6 +90,7 @@ public class UserController {
     	userService.deleteUser(id);
         List<User> users = userService.getUsers();
         model.addAttribute("users", users);
+        log.info("successful user deleting");
         return "redirect:/user/list";
     }
 }

@@ -1,51 +1,54 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
-	  xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="utf-8"/>
-<title>Home</title>
-<link rel="stylesheet" href="../../css/bootstrap.min.css" >
-</head>
-<body>
-<div class="container">
-	<div class="row">
-		<h2>Update Bid</h2>
-	</div>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-	<div class="row">
-		<form action="#" th:action="@{/bid/update/{id}(id=${bid.id})}" th:object="${bid}" method="post" class="form-horizontal" style="width: 100%">
-			<!--
+<head>
+	<meta charset="utf-8" />
+	<title>Home</title>
+	<link rel="stylesheet" href="../../css/bootstrap.min.css">
+</head>
+
+<body>
+	<div class="container">
+		<div class="row">
+			<h2>Update Bid</h2>
+		</div>
+
+		<div class="row">
+			<form action="#" th:action="@{/bid/update/{id}(id=${bid.id})}" th:object="${bid}" method="post"
+				class="form-horizontal" style="width: 100%">
+				<!--
 			TODO: Create a form to edit the values of Bid, there are 2 buttons: Update data and Cancel to the list Bid
 			 -->
-			 <div class="form-group">
-					<label for="account" class="col-sm-2 control-label">Account:</label>
+				<div class="form-group">
+					<label for="account" class="col-sm-2 control-label">Account</label>
 					<div class="col-sm-10">
 						<input type="text" id="account" name="account" th:value="${bid.account}">
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="type" class="col-sm-2 control-label">Type:</label>
+					<label for="type" class="col-sm-2 control-label">Type</label>
 					<div class="col-sm-10">
 						<input type="text" id="type" name="type" th:value="${bid.type}">
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="bidquantity" class="col-sm-2 control-label">Bid Quantity:</label>
+					<label for="bidquantity" class="col-sm-2 control-label">Bid Quantity</label>
 					<div class="col-sm-10">
 						<input type="number" id="bidquantity" name="bidQuantity" th:value="${bid.bidQuantity}">
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-12">
-						<button type="submit" class="btn btn-primary btn-sm" formmethod="post"
-							th:formaction="@{/bid/update/{id}(id=${bid.id})}">Update data</button>
 						<button type="submit" class="btn btn-danger btn-sm" formmethod="get"
 							formaction="/bid/list">Cancel</button>
+						<button type="submit" class="btn btn-primary btn-sm" formmethod="post"
+							th:formaction="@{/bid/update/{id}(id=${bid.id})}">Update BidList</button>
 					</div>
 				</div>
-		</form>
-	</div>
+			</form>
+		</div>
 
-</div>
+	</div>
 </body>
+
 </html>

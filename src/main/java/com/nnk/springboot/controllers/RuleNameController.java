@@ -3,6 +3,8 @@ package com.nnk.springboot.controllers;
 import com.nnk.springboot.domain.RuleName;
 import com.nnk.springboot.services.RuleNameService;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /*import javax.validation.Valid;*/
 
+@Slf4j
 @Controller
 public class RuleNameController {
     // TODO: Inject RuleName service
@@ -33,11 +36,13 @@ public class RuleNameController {
         // TODO: find all RuleName, add to model
     	List<RuleName> ruleNames = ruleNameService.getRuleNames();
     	model.addAttribute("ruleNames", ruleNames);
+    	log.info("display ruleName list");
         return "ruleName/list";
     }
 
     @GetMapping("/ruleName/add")
     public String addRuleForm(/*RuleName bid*/) {
+    	log.info("display form to add ruleName");
         return "ruleName/add";
     }
 
@@ -45,6 +50,7 @@ public class RuleNameController {
     public String validate(@Validated RuleName ruleName, BindingResult result, Model model) {
         // TODO: check data valid and save to db, after saving return RuleName list
     	ruleNameService.saveRuleName(ruleName);
+    	log.info("successful ruleName adding");
         return "ruleName/add";
     }
 
@@ -53,6 +59,7 @@ public class RuleNameController {
         // TODO: get RuleName by Id and to model then show to the form
     	RuleName ruleName = ruleNameService.getRuleNameById(id).get();
     	model.addAttribute("ruleName", ruleName);
+    	log.info("display form to update ruleName");
         return "ruleName/update";
     }
 
@@ -61,6 +68,7 @@ public class RuleNameController {
                              BindingResult result, Model model) {
         // TODO: check required fields, if valid call service to update RuleName and return RuleName list
         ruleNameService.updateRuleName(id, ruleName);
+        log.info("successful ruleName updating");
     	return "redirect:/ruleName/list";
     }
 
@@ -68,6 +76,7 @@ public class RuleNameController {
     public String deleteRuleName(@PathVariable("id") Integer id, Model model) {
         // TODO: Find RuleName by Id and delete the RuleName, return to Rule list
     	ruleNameService.deleteRuleName(id);
+    	log.info("successful ruleName deleting");
         return "redirect:/ruleName/list";
     }
 }

@@ -13,6 +13,10 @@ import java.sql.Timestamp;
 public class RuleName {
 	
     // TODO: Map columns in data table RULENAME with corresponding java fields
+	
+	public RuleName() {
+	}
+	
 	public RuleName(String name, String description, String json, String template, String sqlStr, String sqlPart) {
 		this.name = name;
 		this.description = description;

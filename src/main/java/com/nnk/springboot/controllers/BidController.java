@@ -55,7 +55,6 @@ public class BidController {
 	@GetMapping("/bid/update/{id}")
 	public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
 		// TODO: get Bid by Id and to model then show to the form
-		System.out.println(id);
 		Optional<Bid> optBid = bidService.getBidById(id);
 		Bid bid = optBid.get();
 		model.addAttribute("bid", bid);
@@ -68,9 +67,12 @@ public class BidController {
 			Model model) {
 		// TODO: check required fields, if valid call service to update Bid and return
 		// list Bid
-		bidService.updateBid(id, bid);
-		log.info("successful bid updating");
-		return "redirect:/bid/list";
+		if(!result.hasErrors()) {
+			bidService.updateBid(id, bid);
+			log.info("successful bid updating");
+			return "redirect:/bid/list";
+		}
+		return "bid/update";
 	}
 
 	@GetMapping("/bid/delete/{id}")

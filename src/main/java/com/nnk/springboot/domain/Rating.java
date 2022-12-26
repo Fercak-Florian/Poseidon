@@ -1,8 +1,9 @@
 package com.nnk.springboot.domain;
 
 import javax.persistence.*;
-/*import javax.validation.constraints.NotBlank;*/
+import javax.validation.constraints.DecimalMin;
 /*import javax.validation.constraints.NotNull;*/
+import javax.validation.constraints.NotBlank;
 
 import lombok.Data;
 
@@ -30,15 +31,19 @@ public class Rating {
 	@Column(name = "id")
 	private int id;
 	
+	@NotBlank(message = "Moodys Rating is mandatory")
 	@Column(name = "moodys_rating")
 	private String moodysRating;
 	
+	@NotBlank(message = "Sand Rating is mandatory")
 	@Column(name = "sand_rating")
 	private String sandRating;
 	
+	@NotBlank(message = "Fitch Rating is mandatory")
 	@Column(name = "fitch_rating")
 	private String fitchRating;
 	
+	@DecimalMin(value = "1", inclusive = true)
 	@Column(name = "order_number")
 	private int orderNumber;
 }

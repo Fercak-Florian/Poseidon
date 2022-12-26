@@ -25,24 +25,31 @@
 					<div class="col-sm-10">
 						<input type="text" id="moodysRating" name="moodysRating" th:value="${rating.moodysRating}"
 							autofocus>
+						<p class="text-danger" th:if="${#fields.hasErrors('moodysRating')}" th:errors="*{moodysRating}">
+						</p>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="sandRating" class="col-sm-2 control-label">Sand Rating</label>
 					<div class="col-sm-10">
 						<input type="text" id="sandRating" name="sandRating" th:value="${rating.sandRating}">
+						<p class="text-danger" th:if="${#fields.hasErrors('sandRating')}" th:errors="*{sandRating}"></p>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="fitchRating" class="col-sm-2 control-label">Fitch Rating</label>
 					<div class="col-sm-10">
 						<input type="text" id="fitchRating" name="fitchRating" th:value="${rating.fitchRating}">
+						<p class="text-danger" th:if="${#fields.hasErrors('fitchRating')}" th:errors="*{fitchRating}">
+						</p>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="fitchRating" class="col-sm-2 control-label">Order Number</label>
 					<div class="col-sm-10">
 						<input type="number" id="orderNumber" name="orderNumber" th:value="${rating.orderNumber}">
+						<p class="text-danger" th:if="${#fields.hasErrors('orderNumber')}" th:errors="*{orderNumber}">
+						</p>
 					</div>
 				</div>
 				<div class="form-group">

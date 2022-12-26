@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-/*import javax.validation.Valid;*/
+import javax.validation.Valid;
 
 @Slf4j
 @Controller
@@ -41,17 +41,20 @@ public class RatingController {
     }
 
     @GetMapping("/rating/add")
-    public String addRatingForm(/*Rating rating*/) {
+    public String addRatingForm(Rating rating) {
     	log.info("display form to add rating");
         return "rating/add";
     }
 
     @PostMapping("/rating/validate")
-    public String validate(@Validated Rating rating, BindingResult result, Model model) {
+    public String validate(@Valid Rating rating, BindingResult result, Model model) {
         // TODO: check data valid and save to db, after saving return Rating list
-    	ratingService.saveRating(rating);
-    	log.info("successful rating adding");
-        return "rating/add";
+    	if(!result.hasErrors()) {
+    		ratingService.saveRating(rating);
+        	log.info("successful rating adding");
+            return "redirect:/rating/list";
+    	}
+    	return "rating/add";
     }
 
     @GetMapping("/rating/update/{id}")
@@ -64,12 +67,15 @@ public class RatingController {
     }
 
     @PostMapping("/rating/update/{id}")
-    public String updateRating(@PathVariable("id") Integer id, @Validated Rating rating,
+    public String updateRating(@PathVariable("id") Integer id, @Valid Rating rating,
                              BindingResult result, Model model) {
         // TODO: check required fields, if valid call service to update Rating and return Rating list
-    	ratingService.updateRating(id, rating);
-    	log.info("successful rating updating");
-    	return "redirect:/rating/list";
+    	if(!result.hasErrors()) {
+    		ratingService.updateRating(id, rating);
+        	log.info("successful rating updating");
+        	return "redirect:/rating/list";
+    	}
+    	return "rating/add";
     }
 
     @GetMapping("/rating/delete/{id}")

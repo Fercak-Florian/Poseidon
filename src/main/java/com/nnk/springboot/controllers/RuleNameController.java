@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-/*import javax.validation.Valid;*/
+import javax.validation.Valid;
 
 @Slf4j
 @Controller
@@ -41,17 +41,20 @@ public class RuleNameController {
     }
 
     @GetMapping("/ruleName/add")
-    public String addRuleForm(/*RuleName bid*/) {
+    public String addRuleForm(RuleName ruleName) {
     	log.info("display form to add ruleName");
         return "ruleName/add";
     }
 
     @PostMapping("/ruleName/validate")
-    public String validate(@Validated RuleName ruleName, BindingResult result, Model model) {
+    public String validate(@Valid RuleName ruleName, BindingResult result, Model model) {
         // TODO: check data valid and save to db, after saving return RuleName list
-    	ruleNameService.saveRuleName(ruleName);
-    	log.info("successful ruleName adding");
-        return "ruleName/add";
+    	if(!result.hasErrors()) {
+    		ruleNameService.saveRuleName(ruleName);
+        	log.info("successful ruleName adding");
+            return "redirect:/ruleName/list";
+    	}
+    	return "ruleName/add";
     }
 
     @GetMapping("/ruleName/update/{id}")
@@ -64,12 +67,15 @@ public class RuleNameController {
     }
 
     @PostMapping("/ruleName/update/{id}")
-    public String updateRuleName(@PathVariable("id") Integer id, @Validated RuleName ruleName,
+    public String updateRuleName(@PathVariable("id") Integer id, @Valid RuleName ruleName,
                              BindingResult result, Model model) {
         // TODO: check required fields, if valid call service to update RuleName and return RuleName list
-        ruleNameService.updateRuleName(id, ruleName);
-        log.info("successful ruleName updating");
-    	return "redirect:/ruleName/list";
+        if(!result.hasErrors()) {
+        	ruleNameService.updateRuleName(id, ruleName);
+            log.info("successful ruleName updating");
+        	return "redirect:/ruleName/list";
+        }
+    	return "ruleName/update";
     }
 
     @GetMapping("/ruleName/delete/{id}")

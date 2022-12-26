@@ -1,7 +1,7 @@
 package com.nnk.springboot.domain;
 
 import javax.persistence.*;
-/*import javax.validation.constraints.NotBlank;*/
+import javax.validation.constraints.NotBlank;
 
 import lombok.Data;
 
@@ -27,9 +27,11 @@ public class Trade {
 	@Column(name = "id")
 	private int id;
 	
+	@NotBlank(message = "Account is mandatory")
 	@Column(name = "account")
 	private String account;
 	
+	@NotBlank(message = "Type is mandatory")
 	@Column(name = "type")
 	private String type;
 	

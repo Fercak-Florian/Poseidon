@@ -10,14 +10,12 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-/*import javax.validation.Valid;*/
+import javax.validation.Valid;
 
 @Slf4j
 @Controller
@@ -41,17 +39,20 @@ public class TradeController {
     }
 
     @GetMapping("/trade/add")
-    public String addUser(/*Trade bid*/) {
+    public String addUser(Trade trade) {
     	log.info("display form to add trade");
         return "trade/add";
     }
 
     @PostMapping("/trade/validate")
-    public String validate(@Validated Trade trade, BindingResult result, Model model) {
+    public String validate(@Valid Trade trade, BindingResult result, Model model) {
         // TODO: check data valid and save to db, after saving return Trade list
-    	tradeService.saveTrade(trade);
-    	log.info("successful trade adding");
-        return "trade/add";
+    	if(!result.hasErrors()) {
+    		tradeService.saveTrade(trade);
+        	log.info("successful trade adding");
+            return "redirect:/trade/list";
+    	}
+    	return "trade/add";
     }
 
     @GetMapping("/trade/update/{id}")
@@ -64,12 +65,15 @@ public class TradeController {
     }
 
     @PostMapping("/trade/update/{id}")
-    public String updateTrade(@PathVariable("id") Integer id, @Validated Trade trade,
+    public String updateTrade(@PathVariable("id") Integer id, @Valid Trade trade,
                              BindingResult result, Model model) {
         // TODO: check required fields, if valid call service to update Trade and return Trade list
-    	tradeService.updateTrade(id, trade);
-    	log.info("successful trade updating");
-    	return "redirect:/trade/list";
+    	if(!result.hasErrors()) {
+    		tradeService.updateTrade(id, trade);
+        	log.info("successful trade updating");
+        	return "redirect:/trade/list";
+    	}
+    	return "trade/update";
     }
 
     @GetMapping("/trade/delete/{id}")

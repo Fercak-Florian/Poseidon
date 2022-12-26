@@ -42,7 +42,7 @@ public class Bid {
 	private String type;
 	
 	@DecimalMin(value = "0.0", inclusive = false)
-    @Digits(integer=3, fraction=2)
+    @Digits(/*message="Invalid number"*/ integer=3, fraction=2)
 	@Column(name = "bid_quantity")
 	private double bidQuantity;
 	

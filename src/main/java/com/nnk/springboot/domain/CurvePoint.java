@@ -1,12 +1,14 @@
 package com.nnk.springboot.domain;
 
-/*import org.hibernate.validator.constraints.Length;*/
+import org.hibernate.validator.constraints.Length;
 
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
 /*import javax.validation.constraints.NotBlank;*/
-/*import javax.validation.constraints.NotNull;*/
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
 @Data
@@ -30,15 +32,24 @@ public class CurvePoint {
 	@Column(name = "id")
 	private int id;
 	
+	@DecimalMin(value = "1", inclusive = true)
+    @Digits(integer=3, fraction=0)
+	@NotNull(message = "curveId is mandatory")
 	@Column(name = "curve_id")
 	private int curveId;
 	
 	@Column(name = "as_of_date")
 	private Timestamp asOfDate;
 	
+	@DecimalMin(value = "0.01", inclusive = true)
+    @Digits(integer=3, fraction=2)
+	@NotNull(message = "Term is mandatory")
 	@Column(name = "term")
 	private double term;
 	
+	@DecimalMin(value = "0.01", inclusive = false)
+    @Digits(integer=3, fraction=2)
+	@NotNull(message = "Value is mandatory")
 	@Column(name = "value")
 	private double value;
 	

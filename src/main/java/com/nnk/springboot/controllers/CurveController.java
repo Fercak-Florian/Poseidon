@@ -10,14 +10,11 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-/*import javax.validation.Valid;*/
+import javax.validation.Valid;
 
 @Slf4j
 @Controller
@@ -40,17 +37,20 @@ public class CurveController {
     }
 
     @GetMapping("/curvePoint/add")
-    public String addBidForm(/*CurvePoint curvePoint*/) {
+    public String addBidForm(CurvePoint curvePoint) {
     	log.info("display form to add CurvePoint");
         return "curvePoint/add";
     }
 
     @PostMapping("/curvePoint/validate")
-    public String validate(@Validated CurvePoint curvePoint, BindingResult result, Model model) {
+    public String validate(@Valid CurvePoint curvePoint, BindingResult result, Model model) {
         // TODO: check data valid and save to db, after saving return Curve list
-    	curvePointService.saveCurvePoint(curvePoint);
-    	log.info("successful CurvePoint adding");
-        return "curvePoint/add";
+    	if(!result.hasErrors()) {
+    		curvePointService.saveCurvePoint(curvePoint);
+        	log.info("successful CurvePoint adding");
+            return "redirect:/curvePoint/list";
+    	}
+    	return "curvePoint/add";
     }
 
     @GetMapping("/curvePoint/update/{id}")
@@ -63,7 +63,7 @@ public class CurveController {
     }
 
     @PostMapping("/curvePoint/update/{id}")
-    public String updateBid(@PathVariable("id") Integer id, @Validated CurvePoint curvePoint,
+    public String updateBid(@PathVariable("id") Integer id, @Valid CurvePoint curvePoint,
                              BindingResult result, Model model) {
         // TODO: check required fields, if valid call service to update Curve and return Curve list
     	curvePointService.updateCurvePoint(id, curvePoint);

@@ -5,9 +5,9 @@ import org.springframework.beans.factory.annotation.Required;
 import lombok.Data;
 
 import javax.persistence.*;
-/*import javax.validation.constraints.Digits;*/
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Positive;
 
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -41,7 +41,8 @@ public class Bid {
 	@Column(name = "type")
 	private String type;
 	
-	@Positive
+	@DecimalMin(value = "0.0", inclusive = false)
+    @Digits(integer=3, fraction=2)
 	@Column(name = "bid_quantity")
 	private double bidQuantity;
 	

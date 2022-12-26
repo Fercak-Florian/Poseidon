@@ -47,7 +47,7 @@ public class CurvePoint {
 	@Column(name = "term")
 	private double term;
 	
-	@DecimalMin(value = "0.01", inclusive = false)
+	@DecimalMin(value = "0.01", inclusive = true)
     @Digits(integer=3, fraction=2)
 	@NotNull(message = "Value is mandatory")
 	@Column(name = "value")

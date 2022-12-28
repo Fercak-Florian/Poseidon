@@ -21,8 +21,8 @@ public class RatingService {
 		return ratingRepository.findAll();
 	}
 	
-	public Optional<Rating> getRatingById(int id){
-		return ratingRepository.findById(id);
+	public Rating getRatingById(int id){
+		return ratingRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid rating Id : " + id));
 	}
 	
 	public Rating saveRating(Rating rating) {

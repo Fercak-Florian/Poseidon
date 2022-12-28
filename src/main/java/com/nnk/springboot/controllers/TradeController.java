@@ -58,7 +58,7 @@ public class TradeController {
     @GetMapping("/trade/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         // TODO: get Trade by Id and to model then show to the form
-    	Trade trade = tradeService.getTradeById(id).get();
+    	Trade trade = tradeService.getTradeById(id);
     	model.addAttribute("trade", trade);
     	log.info("display form to update trade");
         return "trade/update";

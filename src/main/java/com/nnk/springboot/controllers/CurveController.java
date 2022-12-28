@@ -55,7 +55,7 @@ public class CurveController {
 	@GetMapping("/curvePoint/update/{id}")
 	public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
 		// TODO: get CurvePoint by Id and to model then show to the form
-		CurvePoint curvePoint = curvePointService.getCurvePointById(id).get();
+		CurvePoint curvePoint = curvePointService.getCurvePointById(id);
 		model.addAttribute("curvePoint", curvePoint);
 		log.info("display form to update CurvePoint");
 		return "curvePoint/update";

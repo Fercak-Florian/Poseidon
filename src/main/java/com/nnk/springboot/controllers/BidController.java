@@ -55,8 +55,7 @@ public class BidController {
 	@GetMapping("/bid/update/{id}")
 	public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
 		// TODO: get Bid by Id and to model then show to the form
-		Optional<Bid> optBid = bidService.getBidById(id);
-		Bid bid = optBid.get();
+		Bid bid = bidService.getBidById(id);
 		model.addAttribute("bid", bid);
 		log.info("display form to update bid");
 		return "bid/update";

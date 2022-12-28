@@ -60,7 +60,7 @@ public class RatingController {
     @GetMapping("/rating/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         // TODO: get Rating by Id and to model then show to the form
-    	Rating rating = ratingService.getRatingById(id).get();
+    	Rating rating = ratingService.getRatingById(id);
     	model.addAttribute("rating", rating);
     	log.info("display form to update rating");
         return "rating/update";

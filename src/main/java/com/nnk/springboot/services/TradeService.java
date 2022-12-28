@@ -21,8 +21,8 @@ public class TradeService {
 		return tradeRepository.findAll();
 	}
 	
-	public Optional<Trade> getTradeById(int id){
-		return tradeRepository.findById(id);
+	public Trade getTradeById(int id){
+		return tradeRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid trade Id : " + id));
 	}
 	
 	public Trade saveTrade(Trade trade) {
@@ -33,6 +33,7 @@ public class TradeService {
 		Trade tradeToUpdate = tradeRepository.findById(id).get();
 		tradeToUpdate.setAccount(trade.getAccount());
 		tradeToUpdate.setType(trade.getType());
+		tradeToUpdate.setBuyQuantity(trade.getBuyQuantity());
 		return tradeRepository.save(tradeToUpdate);
 	}
 	

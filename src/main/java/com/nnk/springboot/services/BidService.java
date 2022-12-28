@@ -21,8 +21,8 @@ public class BidService {
 		return bidRepository.findAll();
 	}
 	
-	public Optional<Bid> getBidById(int id){
-		return bidRepository.findById(id);
+	public Bid getBidById(int id){
+		return bidRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid bid Id : " + id));
 	}
 	
 	public Bid saveBid(Bid bid) {

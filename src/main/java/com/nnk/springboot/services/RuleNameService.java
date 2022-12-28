@@ -21,8 +21,8 @@ public class RuleNameService {
 		return ruleNameRepository.findAll();
 	}
 	
-	public Optional<RuleName> getRuleNameById(int id){
-		return ruleNameRepository.findById(id);
+	public RuleName getRuleNameById(int id){
+		return ruleNameRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid ruleName Id : " + id));
 	}
 	
 	public RuleName saveRuleName(RuleName ruleName) {

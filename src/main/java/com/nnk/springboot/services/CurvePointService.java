@@ -21,8 +21,8 @@ public class CurvePointService {
 		return curvePointRepository.findAll();
 	}
 	
-	public Optional<CurvePoint> getCurvePointById(int id) {
-		return curvePointRepository.findById(id);
+	public CurvePoint getCurvePointById(int id) {
+		return curvePointRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid curvePoint Id : " + id));
 	}
 	
 	public CurvePoint saveCurvePoint(CurvePoint curvePoint) {

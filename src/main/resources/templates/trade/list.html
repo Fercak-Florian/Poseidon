@@ -45,6 +45,7 @@
 						<td><span th:text="${trade.id}"></span></td>
 						<td><span th:text="${trade.account}"></span></td>
 						<td><span th:text="${trade.type}"></span></td>
+						<td><span th:text="${trade.buyQuantity}"></span></td>
 						<td><a th:href="@{/trade/update/{id}(id=${trade.id})}">Edit</a>&nbsp;|&nbsp;
 							<a th:href="@{/trade/delete/{id}(id=${trade.id})}">Delete</a>
 						</td>

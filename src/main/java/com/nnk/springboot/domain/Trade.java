@@ -1,6 +1,8 @@
 package com.nnk.springboot.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 
 import lombok.Data;
@@ -35,6 +37,8 @@ public class Trade {
 	@Column(name = "type")
 	private String type;
 	
+	@DecimalMin(value = "0.0", inclusive = false)
+    @Digits(integer=3, fraction=2)
 	@Column(name = "buy_quantity")
 	private double buyQuantity;
 	

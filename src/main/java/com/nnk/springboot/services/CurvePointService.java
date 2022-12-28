@@ -38,6 +38,7 @@ public class CurvePointService {
 	}
 	
 	public void deleteCurvePoint(int id) {
-		curvePointRepository.deleteById(id);
+		CurvePoint curvePoint = curvePointRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid curvePoint Id : " + id));
+		curvePointRepository.delete(curvePoint);
 	}
 }

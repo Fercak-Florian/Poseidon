@@ -41,6 +41,7 @@ public class RuleNameService {
 	}
 	
 	public void deleteRuleName(int id) {
-		ruleNameRepository.deleteById(id);
+		RuleName ruleName = ruleNameRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid ruleName Id : " + id));
+		ruleNameRepository.delete(ruleName);
 	}
 }

@@ -37,6 +37,7 @@ public class TradeService {
 	}
 	
 	public void deleteTrade(int id) {
-		tradeRepository.deleteById(id);
+		Trade trade = tradeRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid trade Id : " + id));
+		tradeRepository.delete(trade);
 	}
 }

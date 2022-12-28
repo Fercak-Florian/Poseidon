@@ -39,6 +39,7 @@ public class RatingService {
 	}
 	
 	public void deleteRating(int id) {
-		ratingRepository.deleteById(id);
+		Rating rating = ratingRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid rating Id : " + id));
+		ratingRepository.delete(rating);
 	}
 }

@@ -39,6 +39,7 @@ public class BidService {
 	}
 	
 	public void deleteBid(int id) {
-		bidRepository.deleteById(id);
+		Bid bid = bidRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid bid Id : " + id));
+		bidRepository.delete(bid);
 	}
 }

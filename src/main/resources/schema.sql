@@ -90,7 +90,7 @@ CREATE TABLE rule_name (
   PRIMARY KEY (id)
 );
 
-CREATE TABLE users (
+CREATE TABLE user (
   id tinyint(4) NOT NULL AUTO_INCREMENT,
   username VARCHAR(125),
   password VARCHAR(125),

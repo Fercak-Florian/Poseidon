@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BidController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-boot-skeleton</a> &gt; <a href="index.source.html" class="el_package">com.nnk.springboot.controllers</a> &gt; <span class="el_source">BidController.java</span></div><h1>BidController.java</h1><pre class="source lang-java linenums">package com.nnk.springboot.controllers;
+
+import com.nnk.springboot.domain.Bid;
+import com.nnk.springboot.services.BidService;
+import lombok.extern.slf4j.Slf4j;
+import java.util.List;
+import java.util.Optional;
+import javax.validation.Valid;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+
+<span class="nc" id="L18">@Slf4j</span>
+@Controller
+public class BidController {
+	// TODO: Inject Bid service
+	
+	private BidService bidService;
+
+<span class="nc" id="L25">	public BidController(BidService bidListService) {</span>
+<span class="nc" id="L26">		this.bidService = bidListService;</span>
+<span class="nc" id="L27">	}</span>
+
+	@RequestMapping(&quot;/bid/list&quot;)
+	public String home(Model model) {
+		// TODO: call service find all bids to show to the view
+<span class="nc" id="L32">		List&lt;Bid&gt; bids = bidService.getBids();</span>
+<span class="nc" id="L33">		model.addAttribute(&quot;bids&quot;, bids);</span>
+<span class="nc" id="L34">		log.info(&quot;display bid list&quot;);</span>
+<span class="nc" id="L35">		return &quot;bid/list&quot;;</span>
+	}
+
+	@GetMapping(&quot;/bid/add&quot;)
+	public String addBidForm(Bid bid) {
+<span class="nc" id="L40">		log.info(&quot;display form to add bid&quot;);</span>
+<span class="nc" id="L41">		return &quot;bid/add&quot;;</span>
+	}
+
+	@PostMapping(&quot;/bid/validate&quot;)
+	public String validate(@Valid Bid bid, BindingResult result, Model model) {
+		// TODO: check data valid and save to db, after saving return bid list
+<span class="nc bnc" id="L47" title="All 2 branches missed.">		if(!result.hasErrors()) {</span>
+<span class="nc" id="L48">			bidService.saveBid(bid);</span>
+<span class="nc" id="L49">			log.info(&quot;successful bid adding&quot;);</span>
+<span class="nc" id="L50">			return &quot;redirect:/bid/list&quot;;</span>
+		}
+<span class="nc" id="L52">		return &quot;bid/add&quot;;</span>
+	}
+
+	@GetMapping(&quot;/bid/update/{id}&quot;)
+	public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id, Model model) {
+		// TODO: get Bid by Id and to model then show to the form
+<span class="nc" id="L58">		Bid bid = bidService.getBidById(id);</span>
+<span class="nc" id="L59">		model.addAttribute(&quot;bid&quot;, bid);</span>
+<span class="nc" id="L60">		log.info(&quot;display form to update bid&quot;);</span>
+<span class="nc" id="L61">		return &quot;bid/update&quot;;</span>
+	}
+
+	@PostMapping(&quot;/bid/update/{id}&quot;)
+	public String updateBid(@PathVariable(&quot;id&quot;) Integer id, @Valid Bid bid, BindingResult result,
+			Model model) {
+		// TODO: check required fields, if valid call service to update Bid and return
+		// list Bid
+<span class="nc bnc" id="L69" title="All 2 branches missed.">		if(!result.hasErrors()) {</span>
+<span class="nc" id="L70">			bidService.updateBid(id, bid);</span>
+<span class="nc" id="L71">			log.info(&quot;successful bid updating&quot;);</span>
+<span class="nc" id="L72">			return &quot;redirect:/bid/list&quot;;</span>
+		}
+<span class="nc" id="L74">		return &quot;bid/update&quot;;</span>
+	}
+
+	@GetMapping(&quot;/bid/delete/{id}&quot;)
+	public String deleteBid(@PathVariable(&quot;id&quot;) Integer id, Model model) {
+		// TODO: Find Bid by Id and delete the bid, return to Bid list
+<span class="nc" id="L80">		bidService.deleteBid(id);</span>
+<span class="nc" id="L81">		log.info(&quot;successful bid deleting&quot;);</span>
+<span class="nc" id="L82">		return &quot;redirect:/bid/list&quot;;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

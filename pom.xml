@@ -151,6 +151,7 @@
 				<version>0.8.5</version>
 				<configuration>
 					<excludes>
+						<exclude>com/nnk/springboot/*Application.class*</exclude>
 						<exclude>com/nnk/springboot/domain/*Bid.class*</exclude>
 						<exclude>com/nnk/springboot/domain/*CurvePoint.class*</exclude>
 						<exclude>com/nnk/springboot/domain/*Rating.class*</exclude>

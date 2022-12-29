@@ -13,6 +13,16 @@ import lombok.Data;
 @Table(name = "users")
 public class User {
 	
+	public User() {
+	}
+	
+	public User(String username, String password, String fullname, String role) {
+		this.username = username;
+		this.password = password;
+		this.fullname = fullname;
+		this.role = role;
+	}
+	
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;

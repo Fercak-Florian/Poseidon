@@ -29,7 +29,13 @@ public class UserService {
 	}
 
 	public User updateUser(int id, User user) {
-		return null;
+		User userToUpdate = userRepository.findById(id).get();
+		userToUpdate.setUsername(user.getUsername());
+		userToUpdate.setPassword(user.getPassword());
+		userToUpdate.setFullname(user.getFullname());
+		userToUpdate.setRole(user.getRole());
+		User updatedUser = userRepository.save(userToUpdate);
+		return updatedUser;
 	}
 	
 	public void deleteUser(int id) {

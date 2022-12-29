@@ -80,7 +80,7 @@ public class RuleNameServiceTest {
 	}
 	
 	@Test
-	public void testUpdatingRuleName() {
+	public void testUpdateRuleName() {
 		/*ARRANGE*/
 		int id = 0;
 		RuleName ruleName = new RuleName("name", "description", "json", "template", "sqlStr", "sqlPart");

@@ -16,82 +16,82 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import javax.validation.Valid;
 
-/*import javax.validation.Valid;*/
-
-<span class="nc" id="L22">@Slf4j</span>
+<span class="nc" id="L21">@Slf4j</span>
 @Controller
 public class UserController {
-   
-    private UserService userService;
-    
-<span class="nc" id="L28">    public UserController(UserService userService) {</span>
-<span class="nc" id="L29">    	this.userService = userService;</span>
-<span class="nc" id="L30">    }</span>
 
-    @RequestMapping(&quot;/user/list&quot;)
-    public String home(Model model)
-    {
-<span class="nc" id="L35">    	List&lt;User&gt; users = userService.getUsers();</span>
-<span class="nc" id="L36">        model.addAttribute(&quot;users&quot;, users);</span>
-<span class="nc" id="L37">        log.info(&quot;display user list&quot;);</span>
-<span class="nc" id="L38">        return &quot;user/list&quot;;</span>
-    }
+	private UserService userService;
 
-    @GetMapping(&quot;/user/add&quot;)
-    public String addUser(User bid) {
-<span class="nc" id="L43">    	log.info(&quot;display form to add user&quot;);</span>
-<span class="nc" id="L44">        return &quot;user/add&quot;;</span>
-    }
+<span class="nc" id="L27">	public UserController(UserService userService) {</span>
+<span class="nc" id="L28">		this.userService = userService;</span>
+<span class="nc" id="L29">	}</span>
 
-    @PostMapping(&quot;/user/validate&quot;)
-    public String validate(@Validated User user, BindingResult result, Model model) {
-<span class="nc bnc" id="L49" title="All 2 branches missed.">        if (!result.hasErrors()) {</span>
-<span class="nc" id="L50">            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();</span>
-<span class="nc" id="L51">            user.setPassword(encoder.encode(user.getPassword()));</span>
-<span class="nc" id="L52">            userService.saveUser(user);</span>
-<span class="nc" id="L53">            List&lt;User&gt; users = userService.getUsers();</span>
-<span class="nc" id="L54">            model.addAttribute(&quot;users&quot;, users);</span>
-<span class="nc" id="L55">            log.info(&quot;successful user adding&quot;);</span>
-<span class="nc" id="L56">            return &quot;redirect:/user/list&quot;;</span>
-        }
-<span class="nc" id="L58">        return &quot;user/add&quot;;</span>
-    }
+	@RequestMapping(&quot;/user/list&quot;)
+	public String home(Model model) {
+<span class="nc" id="L33">		List&lt;User&gt; users = userService.getUsers();</span>
+<span class="nc" id="L34">		model.addAttribute(&quot;users&quot;, users);</span>
+<span class="nc" id="L35">		log.info(&quot;display user list&quot;);</span>
+<span class="nc" id="L36">		return &quot;user/list&quot;;</span>
+	}
 
-    @GetMapping(&quot;/user/update/{id}&quot;)
-    public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id, Model model) {
-<span class="nc" id="L63">        User user = userService.getUserById(id);</span>
-<span class="nc" id="L64">        user.setPassword(&quot;&quot;);</span>
-<span class="nc" id="L65">        model.addAttribute(&quot;user&quot;, user);</span>
-<span class="nc" id="L66">        log.info(&quot;display form to update user&quot;);</span>
-<span class="nc" id="L67">        return &quot;user/update&quot;;</span>
-    }
+	@GetMapping(&quot;/user/add&quot;)
+	public String addUser(User user) {
+<span class="nc" id="L41">		log.info(&quot;display form to add user&quot;);</span>
+<span class="nc" id="L42">		return &quot;user/add&quot;;</span>
+	}
 
-    @PostMapping(&quot;/user/update/{id}&quot;)
-    public String updateUser(@PathVariable(&quot;id&quot;) Integer id, @Validated User user,
-                             BindingResult result, Model model) {
-<span class="nc bnc" id="L73" title="All 2 branches missed.">        if (result.hasErrors()) {</span>
-<span class="nc" id="L74">        	log.info(&quot;failed to add user&quot;);</span>
-<span class="nc" id="L75">            return &quot;user/update&quot;;</span>
-        }
+	@PostMapping(&quot;/user/validate&quot;)
+	public String validate(@Valid User user, BindingResult result, Model model) {
+<span class="nc" id="L47">		System.out.println(&quot;Le mot de passe saisie est : &quot; + user.getPassword());</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">		if (!result.hasErrors()) {</span>
+<span class="nc" id="L49">			System.out.println(&quot;Pas d'erreurs dans result&quot;);</span>
+<span class="nc" id="L50">			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();</span>
+<span class="nc" id="L51">			user.setPassword(encoder.encode(user.getPassword()));</span>
+<span class="nc" id="L52">			userService.saveUser(user);</span>
+			//List&lt;User&gt; users = userService.getUsers();
+			//model.addAttribute(&quot;users&quot;, users);
+<span class="nc" id="L55">			log.info(&quot;successful user adding&quot;);</span>
+<span class="nc" id="L56">			return &quot;redirect:/user/list&quot;;</span>
+		}
+<span class="nc" id="L58">		System.out.println(&quot;Erreurs dans result&quot;);</span>
+<span class="nc" id="L59">		return &quot;user/add&quot;;</span>
+	}
 
-<span class="nc" id="L78">        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();</span>
-<span class="nc" id="L79">        user.setPassword(encoder.encode(user.getPassword()));</span>
-<span class="nc" id="L80">        user.setId(id);</span>
-<span class="nc" id="L81">        userService.saveUser(user);</span>
-<span class="nc" id="L82">        List&lt;User&gt; users = userService.getUsers();</span>
-<span class="nc" id="L83">        model.addAttribute(&quot;users&quot;, users);</span>
-<span class="nc" id="L84">        log.info(&quot;successful user updating&quot;);</span>
-<span class="nc" id="L85">        return &quot;redirect:/user/list&quot;;</span>
-    }
+	@GetMapping(&quot;/user/update/{id}&quot;)
+	public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id, Model model) {
+<span class="nc" id="L64">		User user = userService.getUserById(id);</span>
+<span class="nc" id="L65">		user.setPassword(&quot;&quot;);</span>
+<span class="nc" id="L66">		model.addAttribute(&quot;user&quot;, user);</span>
+<span class="nc" id="L67">		log.info(&quot;display form to update user&quot;);</span>
+<span class="nc" id="L68">		return &quot;user/update&quot;;</span>
+	}
 
-    @GetMapping(&quot;/user/delete/{id}&quot;)
-    public String deleteUser(@PathVariable(&quot;id&quot;) Integer id, Model model) {
-<span class="nc" id="L90">    	userService.deleteUser(id);</span>
-<span class="nc" id="L91">        List&lt;User&gt; users = userService.getUsers();</span>
-<span class="nc" id="L92">        model.addAttribute(&quot;users&quot;, users);</span>
-<span class="nc" id="L93">        log.info(&quot;successful user deleting&quot;);</span>
-<span class="nc" id="L94">        return &quot;redirect:/user/list&quot;;</span>
-    }
+	@PostMapping(&quot;/user/update/{id}&quot;)
+	public String updateUser(@PathVariable(&quot;id&quot;) Integer id, @Valid User user, BindingResult result, Model model) {
+<span class="nc bnc" id="L73" title="All 2 branches missed.">		if (result.hasErrors()) {</span>
+<span class="nc" id="L74">			log.info(&quot;failed to add user&quot;);</span>
+<span class="nc" id="L75">			return &quot;user/update&quot;;</span>
+		}
+
+<span class="nc" id="L78">		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();</span>
+<span class="nc" id="L79">		user.setPassword(encoder.encode(user.getPassword()));</span>
+<span class="nc" id="L80">		user.setId(id);</span>
+<span class="nc" id="L81">		userService.saveUser(user);</span>
+<span class="nc" id="L82">		List&lt;User&gt; users = userService.getUsers();</span>
+<span class="nc" id="L83">		model.addAttribute(&quot;users&quot;, users);</span>
+<span class="nc" id="L84">		log.info(&quot;successful user updating&quot;);</span>
+<span class="nc" id="L85">		return &quot;redirect:/user/list&quot;;</span>
+	}
+
+	@GetMapping(&quot;/user/delete/{id}&quot;)
+	public String deleteUser(@PathVariable(&quot;id&quot;) Integer id, Model model) {
+<span class="nc" id="L90">		userService.deleteUser(id);</span>
+<span class="nc" id="L91">		List&lt;User&gt; users = userService.getUsers();</span>
+<span class="nc" id="L92">		model.addAttribute(&quot;users&quot;, users);</span>
+<span class="nc" id="L93">		log.info(&quot;successful user deleting&quot;);</span>
+<span class="nc" id="L94">		return &quot;redirect:/user/list&quot;;</span>
+	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

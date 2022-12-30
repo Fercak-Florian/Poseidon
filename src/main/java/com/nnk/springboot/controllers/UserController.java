@@ -44,18 +44,13 @@ public class UserController {
 
 	@PostMapping("/user/validate")
 	public String validate(@Valid User user, BindingResult result, Model model) {
-		System.out.println("Le mot de passe saisie est : " + user.getPassword());
 		if (!result.hasErrors()) {
-			System.out.println("Pas d'erreurs dans result");
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			user.setPassword(encoder.encode(user.getPassword()));
 			userService.saveUser(user);
-			//List<User> users = userService.getUsers();
-			//model.addAttribute("users", users);
 			log.info("successful user adding");
 			return "redirect:/user/list";
 		}
-		System.out.println("Erreurs dans result");
 		return "user/add";
 	}
 

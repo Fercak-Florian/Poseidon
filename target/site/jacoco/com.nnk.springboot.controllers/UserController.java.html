@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-boot-skeleton</a> &gt; <a href="index.source.html" class="el_package">com.nnk.springboot.controllers</a> &gt; <span class="el_source">UserController.java</span></div><h1>UserController.java</h1><pre class="source lang-java linenums">package com.nnk.springboot.controllers;
+
+import com.nnk.springboot.domain.User;
+import com.nnk.springboot.services.UserService;
+
+import lombok.extern.slf4j.Slf4j;
+
+import java.util.List;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import javax.validation.Valid;
+
+<span class="nc" id="L21">@Slf4j</span>
+@Controller
+public class UserController {
+
+	private UserService userService;
+
+<span class="nc" id="L27">	public UserController(UserService userService) {</span>
+<span class="nc" id="L28">		this.userService = userService;</span>
+<span class="nc" id="L29">	}</span>
+
+	@RequestMapping(&quot;/user/list&quot;)
+	public String home(Model model) {
+<span class="nc" id="L33">		List&lt;User&gt; users = userService.getUsers();</span>
+<span class="nc" id="L34">		model.addAttribute(&quot;users&quot;, users);</span>
+<span class="nc" id="L35">		log.info(&quot;display user list&quot;);</span>
+<span class="nc" id="L36">		return &quot;user/list&quot;;</span>
+	}
+
+	@GetMapping(&quot;/user/add&quot;)
+	public String addUser(User user) {
+<span class="nc" id="L41">		log.info(&quot;display form to add user&quot;);</span>
+<span class="nc" id="L42">		return &quot;user/add&quot;;</span>
+	}
+
+	@PostMapping(&quot;/user/validate&quot;)
+	public String validate(@Valid User user, BindingResult result, Model model) {
+<span class="nc" id="L47">		System.out.println(&quot;Le mot de passe saisie est : &quot; + user.getPassword());</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">		if (!result.hasErrors()) {</span>
+<span class="nc" id="L49">			System.out.println(&quot;Pas d'erreurs dans result&quot;);</span>
+<span class="nc" id="L50">			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();</span>
+<span class="nc" id="L51">			user.setPassword(encoder.encode(user.getPassword()));</span>
+<span class="nc" id="L52">			userService.saveUser(user);</span>
+			//List&lt;User&gt; users = userService.getUsers();
+			//model.addAttribute(&quot;users&quot;, users);
+<span class="nc" id="L55">			log.info(&quot;successful user adding&quot;);</span>
+<span class="nc" id="L56">			return &quot;redirect:/user/list&quot;;</span>
+		}
+<span class="nc" id="L58">		System.out.println(&quot;Erreurs dans result&quot;);</span>
+<span class="nc" id="L59">		return &quot;user/add&quot;;</span>
+	}
+
+	@GetMapping(&quot;/user/update/{id}&quot;)
+	public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id, Model model) {
+<span class="nc" id="L64">		User user = userService.getUserById(id);</span>
+<span class="nc" id="L65">		user.setPassword(&quot;&quot;);</span>
+<span class="nc" id="L66">		model.addAttribute(&quot;user&quot;, user);</span>
+<span class="nc" id="L67">		log.info(&quot;display form to update user&quot;);</span>
+<span class="nc" id="L68">		return &quot;user/update&quot;;</span>
+	}
+
+	@PostMapping(&quot;/user/update/{id}&quot;)
+	public String updateUser(@PathVariable(&quot;id&quot;) Integer id, @Valid User user, BindingResult result, Model model) {
+<span class="nc bnc" id="L73" title="All 2 branches missed.">		if (result.hasErrors()) {</span>
+<span class="nc" id="L74">			log.info(&quot;failed to add user&quot;);</span>
+<span class="nc" id="L75">			return &quot;user/update&quot;;</span>
+		}
+
+<span class="nc" id="L78">		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();</span>
+<span class="nc" id="L79">		user.setPassword(encoder.encode(user.getPassword()));</span>
+<span class="nc" id="L80">		user.setId(id);</span>
+<span class="nc" id="L81">		userService.saveUser(user);</span>
+<span class="nc" id="L82">		List&lt;User&gt; users = userService.getUsers();</span>
+<span class="nc" id="L83">		model.addAttribute(&quot;users&quot;, users);</span>
+<span class="nc" id="L84">		log.info(&quot;successful user updating&quot;);</span>
+<span class="nc" id="L85">		return &quot;redirect:/user/list&quot;;</span>
+	}
+
+	@GetMapping(&quot;/user/delete/{id}&quot;)
+	public String deleteUser(@PathVariable(&quot;id&quot;) Integer id, Model model) {
+<span class="nc" id="L90">		userService.deleteUser(id);</span>
+<span class="nc" id="L91">		List&lt;User&gt; users = userService.getUsers();</span>
+<span class="nc" id="L92">		model.addAttribute(&quot;users&quot;, users);</span>
+<span class="nc" id="L93">		log.info(&quot;successful user deleting&quot;);</span>
+<span class="nc" id="L94">		return &quot;redirect:/user/list&quot;;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

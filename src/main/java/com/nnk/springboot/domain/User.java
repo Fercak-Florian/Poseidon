@@ -1,16 +1,12 @@
 package com.nnk.springboot.domain;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-
-import com.nnk.springboot.validators.EmailConstraint;
-
+import com.nnk.springboot.validators.PasswordConstraint;
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User {
 	
 	public User() {
@@ -25,20 +21,24 @@ public class User {
 	
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
-    
-    @EmailConstraint
-    @Size(min = 8, max = 15)
+
     @NotBlank(message = "Username is mandatory")
+    @Column(name = "username")
     private String username;
     
-    @NotBlank(message = "Password is mandatory")
+    @PasswordConstraint
+    //@NotBlank(message = "Password is mandatory")
+    @Column(name = "password")
     private String password;
     
     @NotBlank(message = "FullName is mandatory")
+    @Column(name = "fullname")
     private String fullname;
     
     @NotBlank(message = "Role is mandatory")
+    @Column(name = "role")
     private String role;
 
    /* public Integer getId() {

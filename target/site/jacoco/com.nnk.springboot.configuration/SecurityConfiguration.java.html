@@ -12,58 +12,60 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
 import com.nnk.springboot.services.MyUserDetailsService;
 
 
 @Configuration
 @EnableWebSecurity
-<span class="nc" id="L21">public class SecurityConfiguration {</span>
+<span class="nc" id="L20">public class SecurityConfiguration {</span>
 	
 	@Autowired
 	MyUserDetailsService userDetailsService;
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-<span class="nc" id="L28">		http.authorizeRequests()</span>
-<span class="nc" id="L29">		.antMatchers(&quot;/login&quot;)</span>
-<span class="nc" id="L30">		.permitAll()</span>
-<span class="nc" id="L31">		.anyRequest().authenticated()</span>
+<span class="nc" id="L27">		http.authorizeRequests()</span>
+<span class="nc" id="L28">		.antMatchers(&quot;/login&quot;)</span>
+<span class="nc" id="L29">		.permitAll()</span>
+<span class="nc" id="L30">		.anyRequest().authenticated()</span>
 		
-<span class="nc" id="L33">		.and()</span>
-<span class="nc" id="L34">		.formLogin()</span>
-<span class="nc" id="L35">		.defaultSuccessUrl(&quot;/&quot;, true)</span>
-<span class="nc" id="L36">		.failureUrl(&quot;/login?error=true&quot;)</span>
-<span class="nc" id="L37">		.permitAll()</span>
+<span class="nc" id="L32">		.and()</span>
+<span class="nc" id="L33">		.formLogin()</span>
+<span class="nc" id="L34">		.defaultSuccessUrl(&quot;/&quot;, true)</span>
+<span class="nc" id="L35">		.failureUrl(&quot;/login?error=true&quot;)</span>
+<span class="nc" id="L36">		.permitAll()</span>
 		
-<span class="nc" id="L39">		.and()</span>
-<span class="nc" id="L40">		.logout()</span>
-<span class="nc" id="L41">		.invalidateHttpSession(true).clearAuthentication(true)</span>
-<span class="nc" id="L42">        .logoutRequestMatcher(new AntPathRequestMatcher(&quot;/app-logout&quot;))</span>
-<span class="nc" id="L43">        .logoutSuccessUrl(&quot;/login&quot;)</span>
-<span class="nc" id="L44">        .permitAll();</span>
+<span class="nc" id="L38">		.and()</span>
+<span class="nc" id="L39">		.logout()</span>
+<span class="nc" id="L40">		.invalidateHttpSession(true).clearAuthentication(true)</span>
+<span class="nc" id="L41">        .logoutRequestMatcher(new AntPathRequestMatcher(&quot;/app-logout&quot;))</span>
+<span class="nc" id="L42">        .logoutSuccessUrl(&quot;/login&quot;)</span>
+<span class="nc" id="L43">        .permitAll()</span>
+        
+<span class="nc" id="L45">        .and()</span>
+<span class="nc" id="L46">        .oauth2Login();</span>
 		
-<span class="nc" id="L46">		http.authenticationProvider(authenticationProvider());</span>
-<span class="nc" id="L47">		return http.build();</span>
+<span class="nc" id="L48">		http.authenticationProvider(authenticationProvider());</span>
+<span class="nc" id="L49">		return http.build();</span>
 	}
 
 	@Bean
 	public DaoAuthenticationProvider authenticationProvider() {
-<span class="nc" id="L52">		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();</span>
-<span class="nc" id="L53">		authProvider.setUserDetailsService(userDetailsService);</span>
-<span class="nc" id="L54">		authProvider.setPasswordEncoder(passwordEncoder());</span>
-<span class="nc" id="L55">		return authProvider;</span>
+<span class="nc" id="L54">		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();</span>
+<span class="nc" id="L55">		authProvider.setUserDetailsService(userDetailsService);</span>
+<span class="nc" id="L56">		authProvider.setPasswordEncoder(passwordEncoder());</span>
+<span class="nc" id="L57">		return authProvider;</span>
 	}
 
 	@Bean
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
 			throws Exception {
-<span class="nc" id="L61">		return authenticationConfiguration.getAuthenticationManager();</span>
+<span class="nc" id="L63">		return authenticationConfiguration.getAuthenticationManager();</span>
 	}
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-<span class="nc" id="L66">		return new BCryptPasswordEncoder();</span>
+<span class="nc" id="L68">		return new BCryptPasswordEncoder();</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

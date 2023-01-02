@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CurrentUser.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-boot-skeleton</a> &gt; <a href="index.source.html" class="el_package">com.nnk.springboot.utils</a> &gt; <span class="el_source">CurrentUser.java</span></div><h1>CurrentUser.java</h1><pre class="source lang-java linenums">package com.nnk.springboot.utils;
+
+import java.security.Principal;
+import java.util.Map;
+
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
+import org.springframework.stereotype.Component;
+
+@Component
+public class CurrentUser {
+	
+	private OAuth2AuthorizedClientService authorizedClientService;
+	
+<span class="nc" id="L21">	public CurrentUser(OAuth2AuthorizedClientService authorizedClientService) {</span>
+<span class="nc" id="L22">		this.authorizedClientService = authorizedClientService;</span>
+<span class="nc" id="L23">	}</span>
+	
+	/*AJOUT DE MA METHODE*/
+	/*public Principal getCurrentPrincipal() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		return authentication;
+	}*/
+	
+	public String getUserInfo(Principal user) {
+		/*--------------------------------------------*/
+		
+		/*--------------------------------------------*/
+<span class="nc" id="L35">		StringBuffer userInfo = new StringBuffer();</span>
+		
+<span class="nc bnc" id="L37" title="All 2 branches missed.">		if(user instanceof UsernamePasswordAuthenticationToken) {</span>
+			/*AUTHENTIFICATION CLASSIQUE*/
+<span class="nc" id="L39">			userInfo.append(getUsernamePasswordLoginInfo(user));</span>
+			//System.out.println(userInfo.toString());
+<span class="nc bnc" id="L41" title="All 2 branches missed.">		} else if(user instanceof OAuth2AuthenticationToken) {</span>
+			/*AUTHENTIFICATION AVEC OAUTH*/
+<span class="nc" id="L43">			userInfo.append(getOauth2LoginInfo(user));</span>
+		}
+		//System.out.println(userInfo.toString());
+<span class="nc" id="L46">		return userInfo.toString();</span>
+	}
+	
+	/*RECUPERE LES INFORMATIONS DE CONNEXION AVEC OAUTH*/
+	private StringBuffer getOauth2LoginInfo(Principal user) {
+<span class="nc" id="L51">		StringBuffer protectedInfo = new StringBuffer();</span>
+<span class="nc" id="L52">		OAuth2AuthenticationToken authToken = ((OAuth2AuthenticationToken) user);</span>
+<span class="nc" id="L53">		OAuth2AuthorizedClient authClient = this.authorizedClientService.loadAuthorizedClient(authToken.getAuthorizedClientRegistrationId(), authToken.getName());</span>
+<span class="nc" id="L54">		Map&lt;String, Object&gt; userDetails = ((DefaultOAuth2User) authToken.getPrincipal()).getAttributes();</span>
+<span class="nc" id="L55">		String userToken = authClient.getAccessToken().getTokenValue();</span>
+<span class="nc" id="L56">		protectedInfo.append(&quot;User name &quot; + userDetails.get(&quot;name&quot;));</span>
+<span class="nc" id="L57">		protectedInfo.append(&quot;Email : &quot; + userDetails.get(&quot;email&quot;));</span>
+<span class="nc" id="L58">		protectedInfo.append(&quot;Access Token : &quot; + userToken);</span>
+<span class="nc" id="L59">		return protectedInfo;</span>
+	}
+	
+	/*RECUPERE LES INFORMATIONS DE CONNEXION CLASSIQUE*/
+	private StringBuffer getUsernamePasswordLoginInfo(Principal user) {
+<span class="nc" id="L64">		StringBuffer usernameInfo = new StringBuffer();</span>
+<span class="nc" id="L65">		UsernamePasswordAuthenticationToken token = ((UsernamePasswordAuthenticationToken) user);</span>
+<span class="nc bnc" id="L66" title="All 2 branches missed.">		if(token.isAuthenticated()) {</span>
+<span class="nc" id="L67">			User u = (User) token.getPrincipal();</span>
+<span class="nc" id="L68">			usernameInfo.append(&quot;Welcome, &quot; + u.getUsername());</span>
+<span class="nc" id="L69">		} else {</span>
+<span class="nc" id="L70">			usernameInfo.append(&quot;NA&quot;);</span>
+		}
+<span class="nc" id="L72">		return usernameInfo;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

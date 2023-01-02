@@ -41,7 +41,10 @@ public class SecurityConfiguration {
 		.invalidateHttpSession(true).clearAuthentication(true)
         .logoutRequestMatcher(new AntPathRequestMatcher("/app-logout"))
         .logoutSuccessUrl("/login")
-        .permitAll();
+        .permitAll()
+        
+        .and()
+        .oauth2Login();
 		
 		http.authenticationProvider(authenticationProvider());
 		return http.build();

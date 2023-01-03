@@ -22,8 +22,8 @@ public class HomeController {
 
 	@RequestMapping("/")
 	public String home(Model model, Principal principal) {
-		//String user = currentUser.getUserInfo(principal);
-		//System.out.println(user);
+		String user = currentUser.getUserInfo(principal);
+		System.out.println(user);
 		log.info("display home page");
 		return "home";
 	}

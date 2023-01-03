@@ -1,10 +1,12 @@
 package com.nnk.springboot.services;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import com.nnk.springboot.domain.User;
 
 
@@ -12,16 +14,18 @@ public class UserPrincipal implements UserDetails{
 	
 	private String username;
 	private String password;
+	private List<GrantedAuthority> roles;
 	
 	public UserPrincipal(User user) {
 		this.username = user.getUsername();
 		this.password = user.getPassword();
+		this.roles = new ArrayList<>();
+		roles.add(new SimpleGrantedAuthority(user.getRole()));
 	}
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+		return roles;
 	}
 
 	@Override

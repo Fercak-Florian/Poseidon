@@ -7,6 +7,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
@@ -54,8 +55,8 @@ public class CurrentUser {
 		Map<String, Object> userDetails = ((DefaultOAuth2User) authToken.getPrincipal()).getAttributes();
 		String userToken = authClient.getAccessToken().getTokenValue();
 		protectedInfo.append("User name " + userDetails.get("name"));
-		protectedInfo.append("Email : " + userDetails.get("email"));
-		protectedInfo.append("Access Token : " + userToken);
+		protectedInfo.append(" Email : " + userDetails.get("email"));
+		protectedInfo.append(" Access Token : " + userToken);
 		return protectedInfo;
 	}
 	
@@ -64,7 +65,7 @@ public class CurrentUser {
 		StringBuffer usernameInfo = new StringBuffer();
 		UsernamePasswordAuthenticationToken token = ((UsernamePasswordAuthenticationToken) user);
 		if(token.isAuthenticated()) {
-			User u = (User) token.getPrincipal();
+			UserDetails u = (UserDetails) token.getPrincipal();
 			usernameInfo.append("Welcome, " + u.getUsername());
 		} else {
 			usernameInfo.append("NA");

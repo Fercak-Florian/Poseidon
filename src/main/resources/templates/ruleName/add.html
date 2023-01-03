@@ -17,49 +17,47 @@
 		<div class="row">
 			<form action="#" th:action="@{/ruleName/validate}" th:object="${ruleName}" method="post"
 				class="form-horizontal" style="width: 100%">
-				<!--
-			TODO: Create a form to input the values of RuleName, there are 2 buttons: Save data and Cancel to the list RuleName
-			 -->
 				<div class="form-group">
 					<label for="name" class="col-sm-2 control-label">Name</label>
 					<div class="col-sm-10">
 						<input type="text" id="name" th:field="*{name}" autofocus placeholder="Name">
-					<p class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+						<p class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="description" class="col-sm-2 control-label">Description</label>
 					<div class="col-sm-10">
 						<input type="text" id="description" th:field="*{description}" placeholder="Description">
-					<p class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
+						<p class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">
+						</p>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="json" class="col-sm-2 control-label">Json</label>
 					<div class="col-sm-10">
 						<input type="text" id="json" th:field="*{json}" placeholder="Json">
-					<p class="text-danger" th:if="${#fields.hasErrors('json')}" th:errors="*{json}"></p>
+						<p class="text-danger" th:if="${#fields.hasErrors('json')}" th:errors="*{json}"></p>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="template" class="col-sm-2 control-label">Template</label>
 					<div class="col-sm-10">
 						<input type="text" id="template" th:field="*{template}" placeholder="Template">
-					<p class="text-danger" th:if="${#fields.hasErrors('template')}" th:errors="*{template}"></p>
+						<p class="text-danger" th:if="${#fields.hasErrors('template')}" th:errors="*{template}"></p>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="sqlStr" class="col-sm-2 control-label">SqlStr</label>
 					<div class="col-sm-10">
 						<input type="text" id="sqlStr" th:field="*{sqlStr}" placeholder="SqlStr">
-					<p class="text-danger" th:if="${#fields.hasErrors('sqlStr')}" th:errors="*{sqlStr}"></p>
+						<p class="text-danger" th:if="${#fields.hasErrors('sqlStr')}" th:errors="*{sqlStr}"></p>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="sqlPart" class="col-sm-2 control-label">SqlPart</label>
 					<div class="col-sm-10">
 						<input type="text" id="sqlPart" th:field="*{sqlPart}" placeholder="SqlPart">
-					<p class="text-danger" th:if="${#fields.hasErrors('sqlPart')}" th:errors="*{sqlPart}"></p>
+						<p class="text-danger" th:if="${#fields.hasErrors('sqlPart')}" th:errors="*{sqlPart}"></p>
 					</div>
 				</div>
 				<div class="form-group">

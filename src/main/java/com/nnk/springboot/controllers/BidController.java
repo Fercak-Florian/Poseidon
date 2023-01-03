@@ -4,7 +4,6 @@ import com.nnk.springboot.domain.Bid;
 import com.nnk.springboot.services.BidService;
 import lombok.extern.slf4j.Slf4j;
 import java.util.List;
-import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,12 +13,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
 @Slf4j
 @Controller
 public class BidController {
 	// TODO: Inject Bid service
-	
+
 	private BidService bidService;
 
 	public BidController(BidService bidListService) {
@@ -44,7 +42,7 @@ public class BidController {
 	@PostMapping("/bid/validate")
 	public String validate(@Valid Bid bid, BindingResult result, Model model) {
 		// TODO: check data valid and save to db, after saving return bid list
-		if(!result.hasErrors()) {
+		if (!result.hasErrors()) {
 			bidService.saveBid(bid);
 			log.info("successful bid adding");
 			return "redirect:/bid/list";
@@ -62,11 +60,10 @@ public class BidController {
 	}
 
 	@PostMapping("/bid/update/{id}")
-	public String updateBid(@PathVariable("id") Integer id, @Valid Bid bid, BindingResult result,
-			Model model) {
+	public String updateBid(@PathVariable("id") Integer id, @Valid Bid bid, BindingResult result, Model model) {
 		// TODO: check required fields, if valid call service to update Bid and return
 		// list Bid
-		if(!result.hasErrors()) {
+		if (!result.hasErrors()) {
 			bidService.updateBid(id, bid);
 			log.info("successful bid updating");
 			return "redirect:/bid/list";

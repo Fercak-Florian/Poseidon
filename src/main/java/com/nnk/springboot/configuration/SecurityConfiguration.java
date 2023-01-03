@@ -25,6 +25,7 @@ public class SecurityConfiguration {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
+		.antMatchers("/user/list", "/user/add", "/user/update").hasAnyAuthority("ADMIN")
 		.antMatchers("/login")
 		.permitAll()
 		.anyRequest().authenticated()

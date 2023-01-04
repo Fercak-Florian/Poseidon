@@ -25,7 +25,5 @@ public class MyUserDetailsService implements UserDetailsService {
 		} else {
 			return new UserPrincipal(user);
 		}
-
 	}
-
 }

@@ -1,10 +1,7 @@
 package com.nnk.springboot.services;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.stereotype.Service;
-
 import com.nnk.springboot.domain.Bid;
 import com.nnk.springboot.repositories.BidRepository;
 

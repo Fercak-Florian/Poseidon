@@ -1,9 +1,7 @@
 package com.nnk.springboot.services;
 
 import java.util.List;
-
 import org.springframework.stereotype.Service;
-
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.UserRepository;
 

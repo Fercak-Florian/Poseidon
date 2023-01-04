@@ -2,17 +2,12 @@ package com.nnk.springboot.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-
 import lombok.Data;
-
-import java.sql.Timestamp;
 
 @Data
 @Entity
 @Table(name = "rule_name")
 public class RuleName {
-	
-    // TODO: Map columns in data table RULENAME with corresponding java fields
 	
 	public RuleName() {
 	}

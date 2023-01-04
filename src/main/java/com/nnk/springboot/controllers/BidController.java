@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 @Controller
 public class BidController {
-	// TODO: Inject Bid service
 
 	private BidService bidService;
 
@@ -26,7 +25,6 @@ public class BidController {
 
 	@RequestMapping("/bid/list")
 	public String home(Model model) {
-		// TODO: call service find all bids to show to the view
 		List<Bid> bids = bidService.getBids();
 		model.addAttribute("bids", bids);
 		log.info("display bid list");
@@ -41,7 +39,6 @@ public class BidController {
 
 	@PostMapping("/bid/validate")
 	public String validate(@Valid Bid bid, BindingResult result, Model model) {
-		// TODO: check data valid and save to db, after saving return bid list
 		if (!result.hasErrors()) {
 			bidService.saveBid(bid);
 			log.info("successful bid adding");
@@ -52,7 +49,6 @@ public class BidController {
 
 	@GetMapping("/bid/update/{id}")
 	public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-		// TODO: get Bid by Id and to model then show to the form
 		Bid bid = bidService.getBidById(id);
 		model.addAttribute("bid", bid);
 		log.info("display form to update bid");
@@ -61,8 +57,6 @@ public class BidController {
 
 	@PostMapping("/bid/update/{id}")
 	public String updateBid(@PathVariable("id") Integer id, @Valid Bid bid, BindingResult result, Model model) {
-		// TODO: check required fields, if valid call service to update Bid and return
-		// list Bid
 		if (!result.hasErrors()) {
 			bidService.updateBid(id, bid);
 			log.info("successful bid updating");
@@ -73,7 +67,6 @@ public class BidController {
 
 	@GetMapping("/bid/delete/{id}")
 	public String deleteBid(@PathVariable("id") Integer id, Model model) {
-		// TODO: Find Bid by Id and delete the bid, return to Bid list
 		bidService.deleteBid(id);
 		log.info("successful bid deleting");
 		return "redirect:/bid/list";

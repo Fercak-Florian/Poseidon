@@ -1,23 +1,16 @@
 package com.nnk.springboot.domain;
 
-import org.springframework.beans.factory.annotation.Required;
-
 import lombok.Data;
-
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
-
-import java.sql.Date;
 import java.sql.Timestamp;
 
 @Data
 @Entity
 @Table(name = "bid")
 public class Bid {
-	
-    // TODO: Map columns in data table BIDLIST with corresponding java fields
 	
 	public Bid() {
 	}

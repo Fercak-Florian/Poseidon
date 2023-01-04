@@ -1,13 +1,9 @@
 package com.nnk.springboot.domain;
 
-import org.hibernate.validator.constraints.Length;
-
 import lombok.Data;
-
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
-/*import javax.validation.constraints.NotBlank;*/
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
@@ -15,8 +11,6 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "curve_point")
 public class CurvePoint {
-	
-    // TODO: Map columns in data table CURVEPOINT with corresponding java fields
 	
 	public CurvePoint() {
 	}

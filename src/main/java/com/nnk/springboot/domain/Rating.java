@@ -2,19 +2,13 @@ package com.nnk.springboot.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
-/*import javax.validation.constraints.NotNull;*/
 import javax.validation.constraints.NotBlank;
-
 import lombok.Data;
-
-import java.sql.Timestamp;
 
 @Data
 @Entity
 @Table(name = "rating")
 public class Rating {
-	
-    // TODO: Map columns in data table RATING with corresponding java fields
 	
 	public Rating() {
 	}

@@ -1,5 +1,4 @@
 package com.nnk.springboot.controllers;
-import java.security.Principal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 public class HomeController {
 
 	@RequestMapping("/")
-	public String home(Model model, Principal principal) {
+	public String home(Model model) {
 		log.info("display home page");
 		return "home";
 	}

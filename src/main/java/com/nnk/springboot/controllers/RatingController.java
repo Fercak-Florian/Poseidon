@@ -63,7 +63,7 @@ public class RatingController {
 			log.info("successful rating updating");
 			return "redirect:/rating/list";
 		}
-		return "rating/add";
+		return "rating/update";
 	}
 
 	@GetMapping("/rating/delete/{id}")

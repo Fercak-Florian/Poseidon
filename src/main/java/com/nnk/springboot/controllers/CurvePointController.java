@@ -18,11 +18,11 @@ import javax.validation.Valid;
 
 @Slf4j
 @Controller
-public class CurveController {
+public class CurvePointController {
 
 	private CurvePointService curvePointService;
 
-	public CurveController(CurvePointService curvePointService) {
+	public CurvePointController(CurvePointService curvePointService) {
 		this.curvePointService = curvePointService;
 	}
 
@@ -35,7 +35,7 @@ public class CurveController {
 	}
 
 	@GetMapping("/curvePoint/add")
-	public String addBidForm(CurvePoint curvePoint) {
+	public String addCurvePointForm(CurvePoint curvePoint) {
 		log.info("display form to add CurvePoint");
 		return "curvePoint/add";
 	}
@@ -66,7 +66,7 @@ public class CurveController {
 			log.info("Successful CurvePoint updating");
 			return "redirect:/curvePoint/list";
 		}
-		return "curvePoint/add";
+		return "curvePoint/update";
 	}
 
 	@GetMapping("/curvePoint/delete/{id}")

@@ -8,6 +8,10 @@ import org.springframework.stereotype.Service;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.UserRepository;
 
+/**
+ * This class is used to get a User by its UserName
+ * This class uses the UserRepository interface to perform this action
+ */
 @Service
 public class MyUserDetailsService implements UserDetailsService {
 
@@ -17,6 +21,12 @@ public class MyUserDetailsService implements UserDetailsService {
 		this.userRepository = userRepository;
 	}
 
+	 /**
+     * This method is used to get a User in the database from its UserName
+     * 
+     * @param a String which is the UserName
+     * @return a UserDetails object
+     */
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userRepository.findByUsername(username).get();

@@ -25,13 +25,14 @@ public class SecurityConfiguration {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-		.antMatchers("/user/list", "/user/add", "/user/update").hasAnyAuthority("ADMIN")
-		.antMatchers("/login")
+		.antMatchers("/user/list", "/user/add", "/user/update").hasAuthority("ADMIN")
+		.antMatchers("/login", "/css/**", "/oauth2/**")
 		.permitAll()
 		.anyRequest().authenticated()
 		
 		.and()
 		.formLogin()
+		.loginPage("/login")
 		.defaultSuccessUrl("/", true)
 		.failureUrl("/login?error=true")
 		.permitAll()
@@ -44,7 +45,8 @@ public class SecurityConfiguration {
         .permitAll()
         
         .and()
-        .oauth2Login();
+        .oauth2Login()
+        .loginPage("/login");
 		
 		http.authenticationProvider(authenticationProvider());
 		return http.build();

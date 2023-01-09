@@ -17,6 +17,7 @@ public class CurvePointService {
 	public CurvePointService(CurvePointRepository curvePointRepository) {
 		this.curvePointRepository = curvePointRepository;
 	}
+	
 	/**
      * This method finds all CurvePoints
      * 

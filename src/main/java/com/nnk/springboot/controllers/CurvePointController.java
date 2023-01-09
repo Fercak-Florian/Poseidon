@@ -104,7 +104,7 @@ public class CurvePointController {
 	/**
      * This method deletes a CurvePoint
      * 
-     * @param CurvePoint id, a Model object
+     * @param a CurvePoint id, a Model object
      * @return a String which is the path to the HTML page
      */
 	@GetMapping("/curvePoint/delete/{id}")

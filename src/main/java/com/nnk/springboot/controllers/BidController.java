@@ -28,7 +28,6 @@ public class BidController {
 		this.bidService = bidListService;
 	}
 
-	
 	/**
      * This method gets all Bids and displays a Bid list
      * 
@@ -88,7 +87,7 @@ public class BidController {
 	/**
      * This method validates a Bid and updates it if it contains no errors 
      * 
-     * @param a number id, Bid object, a BindingResult object, a Model object
+     * @param a Bid id, Bid object, a BindingResult object, a Model object
      * @return a String which is the path to the HTML page
      */
 	@PostMapping("/bid/update/{id}")

@@ -14,6 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 
+/**
+ * This class contains necessary method to display a User list, and methods to
+ * add, update and delete a User
+ * This class uses the UserService class to perform this actions
+ */
 @Slf4j
 @Controller
 public class UserController {
@@ -24,6 +29,12 @@ public class UserController {
 		this.userService = userService;
 	}
 
+	/**
+     * This method gets all Users and displays a User list
+     * 
+     * @param a Model object 
+     * @return a String which is the path to the HTML page
+     */
 	@RequestMapping("/user/list")
 	public String home(Model model) {
 		List<User> users = userService.getUsers();
@@ -32,12 +43,24 @@ public class UserController {
 		return "user/list";
 	}
 
+	/**
+     * This method displays the form to add a User
+     * 
+     * @param a User object 
+     * @return a String which is the path to the HTML page
+     */
 	@GetMapping("/user/add")
 	public String addUser(User user) {
 		log.info("display form to add user");
 		return "user/add";
 	}
 
+	/**
+     * This method validates a User and saves it if it contains no errors 
+     * 
+     * @param a User object, a BindingResult object, a Model object
+     * @return a String which is the path to the HTML page
+     */
 	@PostMapping("/user/validate")
 	public String validate(@Valid User user, BindingResult result, Model model) {
 		if (!result.hasErrors()) {
@@ -50,6 +73,12 @@ public class UserController {
 		return "user/add";
 	}
 
+	/**
+     * This method displays the form to update a User
+     * 
+     * @param a User id, a Model object
+     * @return a String which is the path to the HTML page
+     */
 	@GetMapping("/user/update/{id}")
 	public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
 		User user = userService.getUserById(id);
@@ -59,6 +88,12 @@ public class UserController {
 		return "user/update";
 	}
 
+	/**
+     * This method validates a User and updates it if it contains no errors 
+     * 
+     * @param a User id, a User object, a BindingResult object, a Model object
+     * @return a String which is the path to the HTML page
+     */
 	@PostMapping("/user/update/{id}")
 	public String updateUser(@PathVariable("id") Integer id, @Valid User user, BindingResult result, Model model) {
 		if (result.hasErrors()) {
@@ -76,6 +111,12 @@ public class UserController {
 		return "redirect:/user/list";
 	}
 
+	/**
+     * This method deletes a User
+     * 
+     * @param a User id, a Model object
+     * @return a String which is the path to the HTML page
+     */
 	@GetMapping("/user/delete/{id}")
 	public String deleteUser(@PathVariable("id") Integer id, Model model) {
 		userService.deleteUser(id);

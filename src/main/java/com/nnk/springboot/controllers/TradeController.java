@@ -17,6 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
+/**
+ * This class contains necessary method to display a Trade list, and methods to
+ * add, update and delete a Trade
+ * This class uses the TradeService class to perform this actions
+ */
 @Slf4j
 @Controller
 public class TradeController {
@@ -27,6 +32,12 @@ public class TradeController {
 		this.tradeService = tradeService;
 	}
 
+	/**
+     * This method gets all Trades and displays a Trade list
+     * 
+     * @param a Model object 
+     * @return a String which is the path to the HTML page
+     */
     @RequestMapping("/trade/list")
     public String home(Model model)
     {
@@ -36,12 +47,24 @@ public class TradeController {
         return "trade/list";
     }
 
+    /**
+     * This method displays the form to add a Trade
+     * 
+     * @param a Trade object 
+     * @return a String which is the path to the HTML page
+     */
     @GetMapping("/trade/add")
     public String addUser(Trade trade) {
     	log.info("display form to add trade");
         return "trade/add";
     }
 
+    /**
+     * This method validates a Trade and saves it if it contains no errors 
+     * 
+     * @param a Trade object, a BindingResult object, a Model object
+     * @return a String which is the path to the HTML page
+     */
     @PostMapping("/trade/validate")
     public String validate(@Valid Trade trade, BindingResult result, Model model) {
     	if(!result.hasErrors()) {
@@ -52,6 +75,12 @@ public class TradeController {
     	return "trade/add";
     }
 
+    /**
+     * This method displays the form to update a Trade
+     * 
+     * @param a Trade id, a Model object
+     * @return a String which is the path to the HTML page
+     */
     @GetMapping("/trade/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
     	Trade trade = tradeService.getTradeById(id);
@@ -60,6 +89,12 @@ public class TradeController {
         return "trade/update";
     }
 
+    /**
+     * This method validates a Trade and updates it if it contains no errors 
+     * 
+     * @param a Trade id, a Trade object, a BindingResult object, a Model object
+     * @return a String which is the path to the HTML page
+     */
     @PostMapping("/trade/update/{id}")
     public String updateTrade(@PathVariable("id") Integer id, @Valid Trade trade,
                              BindingResult result, Model model) {
@@ -71,6 +106,12 @@ public class TradeController {
     	return "trade/update";
     }
 
+    /**
+     * This method deletes a Trade
+     * 
+     * @param a Trade id, a Model object
+     * @return a String which is the path to the HTML page
+     */
     @GetMapping("/trade/delete/{id}")
     public String deleteTrade(@PathVariable("id") Integer id, Model model) {
     	tradeService.deleteTrade(id);

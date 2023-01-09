@@ -13,6 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 
+/**
+ * This class contains necessary method to display a Rating list, and methods to
+ * add, update and delete a Rating
+ * This class uses the RatingService class to perform this actions
+ */
 @Slf4j
 @Controller
 public class RatingController {
@@ -23,6 +28,12 @@ public class RatingController {
 		this.ratingService = ratingService;
 	}
 
+	/**
+     * This method gets all Ratings and displays a Rating list
+     * 
+     * @param a Model object 
+     * @return a String which is the path to the HTML page
+     */
 	@RequestMapping("/rating/list")
 	public String home(Model model) {
 		List<Rating> ratings = ratingService.getRatings();
@@ -31,12 +42,24 @@ public class RatingController {
 		return "rating/list";
 	}
 
+	/**
+     * This method displays the form to add a Rating
+     * 
+     * @param a Rating object 
+     * @return a String which is the path to the HTML page
+     */
 	@GetMapping("/rating/add")
 	public String addRatingForm(Rating rating) {
 		log.info("display form to add rating");
 		return "rating/add";
 	}
 
+	/**
+     * This method validates a Rating and saves it if it contains no errors 
+     * 
+     * @param a Rating object, a BindingResult object, a Model object
+     * @return a String which is the path to the HTML page
+     */
 	@PostMapping("/rating/validate")
 	public String validate(@Valid Rating rating, BindingResult result, Model model) {
 		if (!result.hasErrors()) {
@@ -47,6 +70,12 @@ public class RatingController {
 		return "rating/add";
 	}
 
+	/**
+     * This method displays the form to update a Rating
+     * 
+     * @param a Rating id, a Model object
+     * @return a String which is the path to the HTML page
+     */
 	@GetMapping("/rating/update/{id}")
 	public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
 		Rating rating = ratingService.getRatingById(id);
@@ -55,6 +84,12 @@ public class RatingController {
 		return "rating/update";
 	}
 
+	/**
+     * This method validates a Rating and updates it if it contains no errors 
+     * 
+     * @param a Rating id, a Rating object, a BindingResult object, a Model object
+     * @return a String which is the path to the HTML page
+     */
 	@PostMapping("/rating/update/{id}")
 	public String updateRating(@PathVariable("id") Integer id, @Valid Rating rating, BindingResult result,
 			Model model) {
@@ -66,6 +101,12 @@ public class RatingController {
 		return "rating/update";
 	}
 
+	/**
+     * This method deletes a Rating
+     * 
+     * @param a Rating id, a Model object
+     * @return a String which is the path to the HTML page
+     */
 	@GetMapping("/rating/delete/{id}")
 	public String deleteRating(@PathVariable("id") Integer id, Model model) {
 		ratingService.deleteRating(id);

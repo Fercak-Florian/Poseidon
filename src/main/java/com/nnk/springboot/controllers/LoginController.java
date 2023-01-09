@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+/**
+ * This class contains necessary method to enable the login of a User
+ */
 @Slf4j
 @Controller
 public class LoginController {
@@ -21,6 +24,12 @@ public class LoginController {
     
     FormComment errorLoginFormComment = new FormComment();
 
+    /**
+     * This method enables a user to log to the application
+     * 
+     * @param a Model object, a Boolean RequestParam
+     * @return a String which is the path to the HTML page
+     */
     @GetMapping("/login")
     public String login(Model model, @RequestParam(name = "error", defaultValue = "false") boolean error) {
     	errorLoginFormComment.setError(error);

@@ -38,7 +38,7 @@ public class TradeService {
 	}
 	
 	/**
-     * This method saves a trade
+     * This method saves a Trade
      * 
      * @param a Trade to save
      * @return the saved Trade

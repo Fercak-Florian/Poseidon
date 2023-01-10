@@ -1,7 +1,9 @@
 package com.nnk.springboot.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import lombok.Data;
 
@@ -37,7 +39,9 @@ public class Rating {
 	@Column(name = "fitch_rating")
 	private String fitchRating;
 	
-	@DecimalMin(value = "1", inclusive = true)
+	@DecimalMax(message = "must be lower than 128", value = "127", inclusive = true)
+	@DecimalMin(message = "must be greater than 0", value = "0", inclusive = false)
+	@Digits(message="numeric value out of range (<3 numbers> expected, for example 123)", integer=3, fraction=0)
 	@Column(name = "order_number")
 	private int orderNumber;
 }

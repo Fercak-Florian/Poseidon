@@ -30,7 +30,6 @@ public class User {
 	private String username;
 
 	@PasswordConstraint
-	// @NotBlank(message = "Password is mandatory")
 	@Column(name = "password")
 	private String password;
 

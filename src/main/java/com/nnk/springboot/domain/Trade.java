@@ -34,8 +34,8 @@ public class Trade {
 	@Column(name = "type")
 	private String type;
 	
-	@DecimalMin(value = "0.0", inclusive = false)
-    @Digits(integer=3, fraction=2)
+	@DecimalMin(message = "must be greater than 0.0", value = "0.0", inclusive = false)
+    @Digits(message="numeric value out of range (<3 numbers>.<2 numbers> expected, for example 123.45)", integer=3, fraction=2)
 	@Column(name = "buy_quantity")
 	private double buyQuantity;
 	

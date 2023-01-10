@@ -2,9 +2,9 @@ package com.nnk.springboot.domain;
 
 import lombok.Data;
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
 @Data
@@ -26,24 +26,22 @@ public class CurvePoint {
 	@Column(name = "id")
 	private int id;
 	
-	@DecimalMin(value = "1", inclusive = true)
-    @Digits(integer=3, fraction=0)
-	@NotNull(message = "curveId is mandatory")
+	@DecimalMax(message = "must be lower than 128", value = "127", inclusive = true)
+	@DecimalMin(message = "must be greater than 0", value = "0", inclusive = false)
+	@Digits(message="numeric value out of range (<3 numbers> expected, for example 123)", integer=3, fraction=0)
 	@Column(name = "curve_id")
 	private int curveId;
 	
 	@Column(name = "as_of_date")
 	private Timestamp asOfDate;
 	
-	@DecimalMin(value = "0.01", inclusive = true)
-    @Digits(integer=3, fraction=2)
-	@NotNull(message = "Term is mandatory")
+	@DecimalMin(message = "must be greater than 0.0", value = "0.0", inclusive = false)
+    @Digits(message="numeric value out of range (<3 numbers>.<2 numbers> expected, for example 123.45)", integer=3, fraction=2)
 	@Column(name = "term")
 	private double term;
 	
-	@DecimalMin(value = "0.01", inclusive = true)
-    @Digits(integer=3, fraction=2)
-	@NotNull(message = "Value is mandatory")
+	@DecimalMin(message = "must be greater than 0.0", value = "0.0", inclusive = false)
+    @Digits(message="numeric value out of range (<3 numbers>.<2 numbers> expected, for example 123.45)", integer=3, fraction=2)
 	@Column(name = "value")
 	private double value;
 	

@@ -67,6 +67,7 @@ public class RuleNameController {
 			log.info("successful ruleName adding");
 			return "redirect:/ruleName/list";
 		}
+		log.warn("ruleName not saved");
 		return "ruleName/add";
 	}
 
@@ -98,6 +99,7 @@ public class RuleNameController {
 			log.info("successful ruleName updating");
 			return "redirect:/ruleName/list";
 		}
+		log.warn("ruleName not updated");
 		return "ruleName/update";
 	}
 	

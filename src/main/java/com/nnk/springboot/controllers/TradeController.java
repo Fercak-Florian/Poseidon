@@ -72,6 +72,7 @@ public class TradeController {
         	log.info("successful trade adding");
             return "redirect:/trade/list";
     	}
+    	log.warn("trade not saved");
     	return "trade/add";
     }
 
@@ -103,6 +104,7 @@ public class TradeController {
         	log.info("successful trade updating");
         	return "redirect:/trade/list";
     	}
+    	log.warn("trade not updated");
     	return "trade/update";
     }
 

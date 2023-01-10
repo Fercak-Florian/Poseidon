@@ -67,6 +67,7 @@ public class CurvePointController {
 			log.info("successful CurvePoint adding");
 			return "redirect:/curvePoint/list";
 		}
+		log.warn("curvePoint not saved");
 		return "curvePoint/add";
 	}
 
@@ -98,6 +99,7 @@ public class CurvePointController {
 			log.info("Successful CurvePoint updating");
 			return "redirect:/curvePoint/list";
 		}
+		log.warn("curvePoint not updated");
 		return "curvePoint/update";
 	}
 

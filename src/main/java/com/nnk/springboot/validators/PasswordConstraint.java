@@ -13,7 +13,7 @@ import javax.validation.Payload;
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PasswordConstraint {
-	String message() default "Invalid password";
+	String message() default "must contain at least 8 characters, 1 number, 1 special character";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

@@ -67,6 +67,7 @@ public class RatingController {
 			log.info("successful rating adding");
 			return "redirect:/rating/list";
 		}
+		log.warn("rating not saved");
 		return "rating/add";
 	}
 
@@ -98,6 +99,7 @@ public class RatingController {
 			log.info("successful rating updating");
 			return "redirect:/rating/list";
 		}
+		log.warn("rating not updated");
 		return "rating/update";
 	}
 

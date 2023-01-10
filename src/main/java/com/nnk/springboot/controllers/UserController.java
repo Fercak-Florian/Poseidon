@@ -70,6 +70,7 @@ public class UserController {
 			log.info("successful user adding");
 			return "redirect:/user/list";
 		}
+		log.warn("user not saved");
 		return "user/add";
 	}
 
@@ -97,7 +98,7 @@ public class UserController {
 	@PostMapping("/user/update/{id}")
 	public String updateUser(@PathVariable("id") Integer id, @Valid User user, BindingResult result, Model model) {
 		if (result.hasErrors()) {
-			log.info("failed to add user");
+			log.warn("user not updated");
 			return "user/update";
 		}
 

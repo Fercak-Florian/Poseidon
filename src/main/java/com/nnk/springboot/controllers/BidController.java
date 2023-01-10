@@ -67,6 +67,7 @@ public class BidController {
 			log.info("successful bid adding");
 			return "redirect:/bid/list";
 		}
+		log.warn("bid not saved");
 		return "bid/add";
 	}
 
@@ -97,6 +98,7 @@ public class BidController {
 			log.info("successful bid updating");
 			return "redirect:/bid/list";
 		}
+		log.warn("bid not updated");
 		return "bid/update";
 	}
 

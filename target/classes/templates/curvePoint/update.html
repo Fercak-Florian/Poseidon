@@ -31,8 +31,8 @@
 						<p class="text-danger" th:if="${#fields.hasErrors('value')}" th:errors="*{value}"></p>
 					</div>
 					<div class="mb-3">
-							<button type="submit" class="btn btn-danger btn-sm" formmethod="get" formaction="/curvePoint/list">Cancel</button>
-							<button type="submit" class="btn btn-primary btn-sm" formmethod="post" th:formaction="@{/curvePoint/update/{id}(id=${curvePoint.id})}">Update CurvePoint</button>
+						<button type="submit" class="btn btn-danger btn-sm" formmethod="get" formaction="/curvePoint/list">Cancel</button>
+						<button type="submit" class="btn btn-primary btn-sm" formmethod="post" th:formaction="@{/curvePoint/update/{id}(id=${curvePoint.id})}">Update CurvePoint</button>
 					</div>
 				</form>
 			</div>

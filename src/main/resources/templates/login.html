@@ -4,38 +4,42 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" th:href="@{/css/login.css}">
+	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 	<title>Login</title>
 </head>
 
 <body>
-	<div id="bloc_page">
-		<div id="section">
-		
-		<!-- Gestion message d'erreur -->
-			<div id="error" th:if="${formComment.error}">
-				<label th:text="${formComment.message}"></label>
+	<div class="container">
+		<div>
+			<!-- Gestion message d'erreur -->
+			<div class="d-flex justify-content-center py-5">
+				<div id="error" th:if="${formComment.error}">
+					<label class="text-danger" th:text="${formComment.message}"></label>
+				</div>
+				<div th:if="${formComment.clearMessage}"></div>
 			</div>
-			<div th:if="${formComment.clearMessage}"></div>
-		
-			<h2>Login with Username and Password</h2>
-			<form id="form" th:action="@{/login}" method="post" enctype="utf8">
-				<div class="field">
-					<!-- LOGIN -->
-					<label id="fieldlabel" for="username">User:</label>
-					<input class="field" type="text" id="username" name="username" autofocus />
-				</div>
-				<!-- PASSWORD -->
-				<div class="field">
-					<label id="fieldlabel" for="password">Password:</label>
-					<input class="field" type="password" id="password" name="password"/>
-				</div>
-				
-				<div>
-					<button id="submit" type="submit" class="btn btn-primary btn-sm">Login</button>
-				</div>
-			</form><br><br><br>
-			<div><a href="/oauth2/authorization/github">Login with Github</a></div>
+			<div class="d-flex justify-content-center mt-5">
+				<h2>Login with Username and Password</h2>
+			</div>
+
+			<div class="d-flex justify-content-center mt-3">
+				<form id="form" th:action="@{/login}" method="post" enctype="utf8">
+					<div class="mb-3">
+						<label for="username" class="form-label">User:</label>
+						<input class="form-control" id="username" name="username" autofocus />
+					</div>
+					<div class="mb-3">
+						<label for="password" class="form-label">Password:</label>
+						<input type="password" class="form-control" id="password" name="password"/>
+					</div>
+					<div>
+						<button id="submit" type="submit" class="btn btn-primary btn-sm">Login</button>
+					</div>
+				</form>
+			</div>
+			<div class="d-flex justify-content-center mt-5">
+				<a href="/oauth2/authorization/github">Login with Github</a>
+			</div>
 		</div>
 	</div>
 </body>

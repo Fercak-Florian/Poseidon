@@ -3,14 +3,34 @@
 
 <head>
 	<title> Poseidon </title>
-	<link rel="stylesheet" href="/css/styles.css" />
+	<link rel="stylesheet" href="../../css/bootstrap.min.css"/>
 </head>
 
 <body>
-	<h3> HOME PAGE </h3>
-	<p>
-		<a href="/login">Login</a> or create one <a href="/user/list"> User management </a> or go to <a href="bid/list"> Financial management </a>
-	</p>
+	<div class="container">
+		<div class="d-flex justify-content-end">
+			<div>
+				<div>
+					Logged in user: <b th:inline="text" class="user"> [[${#httpServletRequest.remoteUser}]] </b>
+				</div>
+				<div class="mt-1">
+					<form th:action="@{/app-logout}" method="POST">
+						<input type="submit" value="Logout"/>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="d-flex justify-content-center mt-5">
+			<h2>Poseidon - Trading App</h2>
+		</div>
+		<div>
+			<div class="d-flex justify-content-center mt-5">
+				<a class="btn btn-primary" href="/user/list"> User management </a>
+			</div>
+			<div class="d-flex justify-content-center mt-5">
+				<a class="btn btn-primary" href="bid/list"> Financial management </a>
+			</div>
+		</div>
+	</div>
 </body>
-
 </html>

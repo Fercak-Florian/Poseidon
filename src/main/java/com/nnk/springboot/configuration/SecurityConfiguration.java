@@ -22,11 +22,18 @@ public class SecurityConfiguration {
 	@Autowired
 	MyUserDetailsService userDetailsService;
 
+	String[] staticResources = {
+			"/login",
+			"/css/**",
+			"/oauth2/**",
+			"/img/**"
+	};
+
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 		.antMatchers("/user/list", "/user/add", "/user/update").hasAuthority("ADMIN")
-		.antMatchers("/login", "/css/**", "/oauth2/**")
+		.antMatchers(staticResources)
 		.permitAll()
 		.anyRequest().authenticated()
 		

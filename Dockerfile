@@ -5,7 +5,7 @@ FROM eclipse-temurin:11-jdk-alpine
 RUN mkdir /app
 
 # copie du fichier jar dans mon image docker, dans le repertoire "app"
-COPY ./target/spring-boot-skeleton-0.0.1-SNAPSHOT.jar /app/
+COPY ./target/poseidon-0.0.1-SNAPSHOT.jar /app/
 
 # aller dans le repertoire "app"
 WORKDIR /app
@@ -14,4 +14,4 @@ WORKDIR /app
 EXPOSE 8082
 
 # commande qui est lancee au demarage du conteneur
-CMD "java" "-jar" spring-boot-skeleton-0.0.1-SNAPSHOT.jar
+CMD "java" "-jar" poseidon-0.0.1-SNAPSHOT.jar

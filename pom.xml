@@ -16,11 +16,11 @@
 
 	<!-- ===== INFORMATIONS MAVEN ===== -->
 	<groupId>net.guides.springboothelloworld</groupId>
-	<artifactId>spring-boot-skeleton</artifactId>
+	<artifactId>poseidon</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>spring-boot-skeleton</name>
+	<name>poseidon</name>
 	<description>Demo project for Spring Boot</description>
 
 	<!-- ================================================================== -->
@@ -34,7 +34,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 	</properties>
 
 	<!-- ================================================================== -->

@@ -5,39 +5,71 @@ import org.springframework.stereotype.Service;
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.repositories.RatingRepository;
 
+/**
+ * This class contains necessary methods to get, add, update and delete a Rating
+ * This class uses the RatingRepository interface to perform this actions
+ */
 @Service
 public class RatingService {
 	
 	private RatingRepository ratingRepository;
 	
-<span class="fc" id="L13">	public RatingService(RatingRepository ratingRepository) {</span>
-<span class="fc" id="L14">		this.ratingRepository = ratingRepository;</span>
-<span class="fc" id="L15">	}</span>
+<span class="fc" id="L17">	public RatingService(RatingRepository ratingRepository) {</span>
+<span class="fc" id="L18">		this.ratingRepository = ratingRepository;</span>
+<span class="fc" id="L19">	}</span>
 	
+	/**
+     * This method finds all Ratings
+     * 
+     * @return a list of Rating
+     */
 	public List&lt;Rating&gt; getRatings(){
-<span class="fc" id="L18">		return ratingRepository.findAll();</span>
+<span class="fc" id="L27">		return ratingRepository.findAll();</span>
 	}
 	
+	/**
+     * This method finds a Rating by its id in database
+     * 
+     * @param a Rating id
+     * @return a Rating if it's found
+     */
 	public Rating getRatingById(int id){
-<span class="fc" id="L22">		return ratingRepository.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid rating Id : &quot; + id));</span>
+<span class="fc" id="L37">		return ratingRepository.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid rating Id : &quot; + id));</span>
 	}
 	
+	/**
+     * This method saves a Rating
+     * 
+     * @param a Rating to save
+     * @return the saved Rating
+     */
 	public Rating saveRating(Rating rating) {
-<span class="fc" id="L26">		return ratingRepository.save(rating);</span>
+<span class="fc" id="L47">		return ratingRepository.save(rating);</span>
 	}
 	
+	/**
+     * This method finds and updates a Rating
+     * 
+     * @param a Rating to update and its id in database
+     * @return the updated Rating
+     */
 	public Rating updateRating(int id, Rating rating) {
-<span class="fc" id="L30">		Rating ratingToUpdate = ratingRepository.findById(id).get();</span>
-<span class="fc" id="L31">		ratingToUpdate.setMoodysRating(rating.getMoodysRating());</span>
-<span class="fc" id="L32">		ratingToUpdate.setSandRating(rating.getSandRating());</span>
-<span class="fc" id="L33">		ratingToUpdate.setFitchRating(rating.getFitchRating());</span>
-<span class="fc" id="L34">		ratingToUpdate.setOrderNumber(rating.getOrderNumber());</span>
-<span class="fc" id="L35">		return ratingRepository.save(ratingToUpdate);</span>
+<span class="fc" id="L57">		Rating ratingToUpdate = ratingRepository.findById(id).get();</span>
+<span class="fc" id="L58">		ratingToUpdate.setMoodysRating(rating.getMoodysRating());</span>
+<span class="fc" id="L59">		ratingToUpdate.setSandRating(rating.getSandRating());</span>
+<span class="fc" id="L60">		ratingToUpdate.setFitchRating(rating.getFitchRating());</span>
+<span class="fc" id="L61">		ratingToUpdate.setOrderNumber(rating.getOrderNumber());</span>
+<span class="fc" id="L62">		return ratingRepository.save(ratingToUpdate);</span>
 	}
 	
+	/**
+     * This method finds a Rating and deletes it
+     * 
+     * @param a Rating id in database
+     */
 	public void deleteRating(int id) {
-<span class="fc" id="L39">		Rating rating = ratingRepository.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid rating Id : &quot; + id));</span>
-<span class="fc" id="L40">		ratingRepository.delete(rating);</span>
-<span class="fc" id="L41">	}</span>
+<span class="fc" id="L71">		Rating rating = ratingRepository.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid rating Id : &quot; + id));</span>
+<span class="fc" id="L72">		ratingRepository.delete(rating);</span>
+<span class="fc" id="L73">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

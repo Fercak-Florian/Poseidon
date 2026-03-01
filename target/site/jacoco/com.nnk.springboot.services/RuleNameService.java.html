@@ -5,41 +5,73 @@ import org.springframework.stereotype.Service;
 import com.nnk.springboot.domain.RuleName;
 import com.nnk.springboot.repositories.RuleNameRepository;
 
+/**
+ * This class contains necessary methods to get, add, update and delete a RuleName
+ * This class uses the RuleNameRepository interface to perform this actions
+ */
 @Service
 public class RuleNameService {
 	
 	private RuleNameRepository ruleNameRepository;
 	
-<span class="fc" id="L13">	public RuleNameService(RuleNameRepository ruleNameRepository) {</span>
-<span class="fc" id="L14">		this.ruleNameRepository = ruleNameRepository;</span>
-<span class="fc" id="L15">	}</span>
+<span class="fc" id="L17">	public RuleNameService(RuleNameRepository ruleNameRepository) {</span>
+<span class="fc" id="L18">		this.ruleNameRepository = ruleNameRepository;</span>
+<span class="fc" id="L19">	}</span>
 
+	/**
+     * This method finds all RuleName
+     * 
+     * @return a list of RuleName
+     */
 	public List&lt;RuleName&gt; getRuleNames(){
-<span class="fc" id="L18">		return ruleNameRepository.findAll();</span>
+<span class="fc" id="L27">		return ruleNameRepository.findAll();</span>
 	}
 	
+	/**
+     * This method finds a RuleName by its id in database
+     * 
+     * @param a RuleName id
+     * @return a RuleName if it's found
+     */
 	public RuleName getRuleNameById(int id){
-<span class="fc" id="L22">		return ruleNameRepository.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid ruleName Id : &quot; + id));</span>
+<span class="fc" id="L37">		return ruleNameRepository.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid ruleName Id : &quot; + id));</span>
 	}
 	
+	/**
+     * This method saves a RuleName
+     * 
+     * @param a RuleName to save
+     * @return the saved RuleName
+     */
 	public RuleName saveRuleName(RuleName ruleName) {
-<span class="fc" id="L26">		return ruleNameRepository.save(ruleName);</span>
+<span class="fc" id="L47">		return ruleNameRepository.save(ruleName);</span>
 	}
 	
+	/**
+     * This method finds and updates a RuleName
+     * 
+     * @param a RuleName to update and its id in database
+     * @return the updated RuleName
+     */
 	public RuleName updateRuleName(int id, RuleName ruleName) {
-<span class="fc" id="L30">		RuleName ruleNameToUpdate = ruleNameRepository.findById(id).get();</span>
-<span class="fc" id="L31">		ruleNameToUpdate.setName(ruleName.getName());</span>
-<span class="fc" id="L32">		ruleNameToUpdate.setDescription(ruleName.getDescription());</span>
-<span class="fc" id="L33">		ruleNameToUpdate.setJson(ruleName.getJson());</span>
-<span class="fc" id="L34">		ruleNameToUpdate.setTemplate(ruleName.getTemplate());</span>
-<span class="fc" id="L35">		ruleNameToUpdate.setSqlStr(ruleName.getSqlStr());</span>
-<span class="fc" id="L36">		ruleNameToUpdate.setSqlPart(ruleName.getSqlPart());</span>
-<span class="fc" id="L37">		return ruleNameRepository.save(ruleNameToUpdate);</span>
+<span class="fc" id="L57">		RuleName ruleNameToUpdate = ruleNameRepository.findById(id).get();</span>
+<span class="fc" id="L58">		ruleNameToUpdate.setName(ruleName.getName());</span>
+<span class="fc" id="L59">		ruleNameToUpdate.setDescription(ruleName.getDescription());</span>
+<span class="fc" id="L60">		ruleNameToUpdate.setJson(ruleName.getJson());</span>
+<span class="fc" id="L61">		ruleNameToUpdate.setTemplate(ruleName.getTemplate());</span>
+<span class="fc" id="L62">		ruleNameToUpdate.setSqlStr(ruleName.getSqlStr());</span>
+<span class="fc" id="L63">		ruleNameToUpdate.setSqlPart(ruleName.getSqlPart());</span>
+<span class="fc" id="L64">		return ruleNameRepository.save(ruleNameToUpdate);</span>
 	}
 	
+	/**
+     * This method finds a RuleName and deletes it
+     * 
+     * @param a RuleName id in database
+     */
 	public void deleteRuleName(int id) {
-<span class="fc" id="L41">		RuleName ruleName = ruleNameRepository.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid ruleName Id : &quot; + id));</span>
-<span class="fc" id="L42">		ruleNameRepository.delete(ruleName);</span>
-<span class="fc" id="L43">	}</span>
+<span class="fc" id="L73">		RuleName ruleName = ruleNameRepository.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid ruleName Id : &quot; + id));</span>
+<span class="fc" id="L74">		ruleNameRepository.delete(ruleName);</span>
+<span class="fc" id="L75">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

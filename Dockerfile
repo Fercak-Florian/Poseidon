@@ -1,5 +1,5 @@
 # telechargement de l'image de base
-FROM eclipse-temurin:11-jdk-alpine
+FROM eclipse-temurin:17-jdk-alpine
 
 # creation d'un repertoire "app"
 RUN mkdir /app

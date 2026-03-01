@@ -1,3 +1,14 @@
+# STAGE 1 : Build avec Maven
+FROM maven:3.8-eclipse-temurin-11 AS build
+
+# Copier les fichiers du projet
+COPY pom.xml .
+COPY src ./src
+
+# Compiler l'application
+RUN mvn clean package -DskipTests
+
+# STAGE 2 : Image finale
 # telechargement de l'image de base
 FROM eclipse-temurin:11-jdk-alpine
 

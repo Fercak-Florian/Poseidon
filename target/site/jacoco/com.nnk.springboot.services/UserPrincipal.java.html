@@ -8,53 +8,76 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import com.nnk.springboot.domain.User;
 
+/**
+ * This class is used to transform a User to a UserDetails object and implements
+ * the UserDetails interface
+ */
+public class UserPrincipal implements UserDetails {
 
-public class UserPrincipal implements UserDetails{
-	
 	private String username;
 	private String password;
 	private List&lt;GrantedAuthority&gt; roles;
-	
-<span class="fc" id="L18">	public UserPrincipal(User user) {</span>
-<span class="fc" id="L19">		this.username = user.getUsername();</span>
-<span class="fc" id="L20">		this.password = user.getPassword();</span>
-<span class="fc" id="L21">		this.roles = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L22">		roles.add(new SimpleGrantedAuthority(user.getRole()));</span>
-<span class="fc" id="L23">	}</span>
-	
+
+	/**
+	 * This constructor is used to transform a user object to a UserDetails object
+	 * 
+	 * @param a User object
+	 */
+<span class="fc" id="L26">	public UserPrincipal(User user) {</span>
+<span class="fc" id="L27">		this.username = user.getUsername();</span>
+<span class="fc" id="L28">		this.password = user.getPassword();</span>
+<span class="fc" id="L29">		this.roles = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L30">		roles.add(new SimpleGrantedAuthority(user.getRole()));</span>
+<span class="fc" id="L31">	}</span>
+
+	/**
+	 * This method is used to get User authorities
+	 * 
+	 * @return a collection of GrantedAuthority
+	 */
 	@Override
 	public Collection&lt;? extends GrantedAuthority&gt; getAuthorities() {
-<span class="nc" id="L27">		return roles;</span>
+<span class="nc" id="L40">		return roles;</span>
 	}
 
+	/**
+	 * This method is used to get User password
+	 * 
+	 * @return a String
+	 */
 	@Override
 	public String getPassword() {
-<span class="nc" id="L32">		return password;</span>
+<span class="nc" id="L50">		return password;</span>
 	}
 
+	/**
+	 * This method is used to get User UserName
+	 * 
+	 * @return a String
+	 */
 	@Override
 	public String getUsername() {
-<span class="fc" id="L37">		return username;</span>
+<span class="fc" id="L60">		return username;</span>
 	}
 
 	@Override
 	public boolean isAccountNonExpired() {
-<span class="nc" id="L42">		return true;</span>
+<span class="nc" id="L65">		return true;</span>
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-<span class="nc" id="L47">		return true;</span>
+<span class="nc" id="L70">		return true;</span>
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-<span class="nc" id="L52">		return true;</span>
+<span class="nc" id="L75">		return true;</span>
 	}
 
 	@Override
 	public boolean isEnabled() {
-<span class="nc" id="L57">		return true;</span>
+<span class="nc" id="L80">		return true;</span>
 	}
 
 }

@@ -4,19 +4,34 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import lombok.extern.slf4j.Slf4j;
 
-<span class="fc" id="L7">@Slf4j</span>
+/**
+ * This class contains necessary method to display the home page
+ */
+<span class="fc" id="L10">@Slf4j</span>
 @Controller
-<span class="fc" id="L9">public class HomeController {</span>
+<span class="fc" id="L12">public class HomeController {</span>
 
+	/**
+     * This displays the home page
+     * 
+     * @param a Model object 
+     * @return a String which is the path to the HTML page
+     */
 	@RequestMapping(&quot;/&quot;)
 	public String home(Model model) {
-<span class="fc" id="L13">		log.info(&quot;display home page&quot;);</span>
-<span class="fc" id="L14">		return &quot;home&quot;;</span>
+<span class="fc" id="L22">		log.info(&quot;display home page&quot;);</span>
+<span class="fc" id="L23">		return &quot;home&quot;;</span>
 	}
 
+	/**
+     * This displays the home page
+     * 
+     * @param a Model object 
+     * @return a String which is the path to the HTML page
+     */
 	@RequestMapping(&quot;/admin/home&quot;)
 	public String adminHome(Model model) {
-<span class="fc" id="L19">		return &quot;redirect:/bid/list&quot;;</span>
+<span class="fc" id="L34">		return &quot;redirect:/bid/list&quot;;</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

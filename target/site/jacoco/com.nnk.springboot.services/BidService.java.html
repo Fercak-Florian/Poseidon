@@ -4,40 +4,71 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import com.nnk.springboot.domain.Bid;
 import com.nnk.springboot.repositories.BidRepository;
-
+/**
+ * This class contains necessary methods to get, add, update and delete a Bid
+ * This class uses the BidRepository interface to perform this actions
+ */
 @Service
 public class BidService {
 	
 	private BidRepository bidRepository;
 	
-<span class="fc" id="L13">	public BidService (BidRepository bidRepository) {</span>
-<span class="fc" id="L14">		this.bidRepository = bidRepository;</span>
-<span class="fc" id="L15">	}</span>
+<span class="fc" id="L16">	public BidService (BidRepository bidRepository) {</span>
+<span class="fc" id="L17">		this.bidRepository = bidRepository;</span>
+<span class="fc" id="L18">	}</span>
 
+	/**
+     * This method finds all Bids
+     * 
+     * @return a list of Bid
+     */
 	public List&lt;Bid&gt; getBids() {
-<span class="fc" id="L18">		return bidRepository.findAll();</span>
+<span class="fc" id="L26">		return bidRepository.findAll();</span>
 	}
 	
+	/**
+     * This method finds a Bid by its id in database
+     * 
+     * @param a bid id
+     * @return a Bid if it's found
+     */
 	public Bid getBidById(int id){
-<span class="fc" id="L22">		return bidRepository.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid bid Id : &quot; + id));</span>
+<span class="fc" id="L36">		return bidRepository.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid bid Id : &quot; + id));</span>
 	}
 	
+	/**
+     * This method saves a Bid
+     * 
+     * @param a Bid to save
+     * @return the saved Bid
+     */
 	public Bid saveBid(Bid bid) {
-<span class="fc" id="L26">		return bidRepository.save(bid);</span>
+<span class="fc" id="L46">		return bidRepository.save(bid);</span>
 	}
 	
+	/**
+     * This method finds and updates a Bid
+     * 
+     * @param a Bid to update and its id in database
+     * @return the updated Bid
+     */
 	public Bid updateBid(int id, Bid bid) {
-<span class="fc" id="L30">		Bid bidToUpdate = bidRepository.findById(id).get();</span>
-<span class="fc" id="L31">		bidToUpdate.setAccount(bid.getAccount());</span>
-<span class="fc" id="L32">		bidToUpdate.setType(bid.getType());</span>
-<span class="fc" id="L33">		bidToUpdate.setBidQuantity(bid.getBidQuantity());</span>
-<span class="fc" id="L34">		Bid updatedBid = bidRepository.save(bidToUpdate);</span>
-<span class="fc" id="L35">		return updatedBid;</span>
+<span class="fc" id="L56">		Bid bidToUpdate = bidRepository.findById(id).get();</span>
+<span class="fc" id="L57">		bidToUpdate.setAccount(bid.getAccount());</span>
+<span class="fc" id="L58">		bidToUpdate.setType(bid.getType());</span>
+<span class="fc" id="L59">		bidToUpdate.setBidQuantity(bid.getBidQuantity());</span>
+<span class="fc" id="L60">		Bid updatedBid = bidRepository.save(bidToUpdate);</span>
+<span class="fc" id="L61">		return updatedBid;</span>
 	}
 	
+	/**
+     * This method finds a Bid and deletes it
+     * 
+     * @param a Bid id in database
+     */
 	public void deleteBid(int id) {
-<span class="fc" id="L39">		Bid bid = bidRepository.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid bid Id : &quot; + id));</span>
-<span class="fc" id="L40">		bidRepository.delete(bid);</span>
-<span class="fc" id="L41">	}</span>
+<span class="fc" id="L70">		Bid bid = bidRepository.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid bid Id : &quot; + id));</span>
+<span class="fc" id="L71">		bidRepository.delete(bid);</span>
+<span class="fc" id="L72">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

@@ -11,7 +11,7 @@ COPY ./target/poseidon-0.0.1-SNAPSHOT.jar /app/
 WORKDIR /app
 
 # on expose le port 8082 de l'image docker
-EXPOSE 8082
+EXPOSE 8087
 
 # commande qui est lancee au demarage du conteneur
-CMD "java" "-jar" poseidon-0.0.1-SNAPSHOT.jar
+CMD "java" "-jar" poseidon-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod

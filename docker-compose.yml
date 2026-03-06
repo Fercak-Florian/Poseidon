@@ -1,5 +1,5 @@
 # on declare la version de Docker-Compose que l'on souhaite utiliser
-version: "3"
+version: "3.8"
 
 # on declare les services qui composeront la stack
 services:
@@ -16,13 +16,20 @@ services:
       MYSQL_DATABASE: demo
       #MYSQL_ROOT_USERNAME: root
       MYSQL_ROOT_PASSWORD: rootroot
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-prootroot" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   # image poseidon
   poseidon:
-    depends_on:
-      - db
+    build: .
     image: poseidon-image
     container_name: poseidon
+    depends_on:
+      db:
+        condition: service_healthy
     ports:
       - "8087:8087"
     restart: always

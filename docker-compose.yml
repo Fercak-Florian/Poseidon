@@ -16,11 +16,11 @@ services:
       MYSQL_DATABASE: demo
       #MYSQL_ROOT_USERNAME: root
       MYSQL_ROOT_PASSWORD: rootroot
-    healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-prootroot" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+    #healthcheck:
+      #test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-prootroot" ]
+      #interval: 10s
+      #timeout: 5s
+      #retries: 5
 
   # image poseidon
   poseidon:
@@ -30,8 +30,9 @@ services:
     image: poseidon-image
     container_name: poseidon
     depends_on:
-      db:
-        condition: service_healthy
+      - db
+      #db:
+        #condition: service_healthy
     ports:
       - "8087:8087"
     restart: always

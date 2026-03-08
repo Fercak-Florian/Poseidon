@@ -1,5 +1,5 @@
 # on declare la version de Docker-Compose que l'on souhaite utiliser
-version: "3.8"
+#version: "3.8"
 
 # on declare les services qui composeront la stack
 services:

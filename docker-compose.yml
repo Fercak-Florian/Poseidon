@@ -24,7 +24,9 @@ services:
 
   # image poseidon
   poseidon:
-    build: .
+    build:
+      context: .
+      network: host
     image: poseidon-image
     container_name: poseidon
     depends_on:
